@@ -1,6 +1,314 @@
-{%extends 'layouts/main.html'%}
-{%block content%}
-<div>
-    <p>This is landing page of pathshala tms</p>
-</div>
+{% extends 'layouts/main.html' %}
+{% block content %}
+  <!-- Hero Section -->
+  <div class="bg-gradient-to-br from-blue-600 via-purple-600 to-indigo-700 text-white">
+    <div class="max-w-[95%] mx-auto px-4 sm:px-6 lg:px-8 py-6 lg:py-9">
+      <div class="text-center">
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">Welcome to <span class="text-yellow-300">Pathshala TMS</span></h1>
+        <p class="text-xl md:text-2xl text-blue-100 max-w-3xl mx-auto mb-10 leading-relaxed">Revolutionizing education management with cutting-edge technology and innovative solutions for modern learning environments</p>
+      </div>
+      <div class="container mx-auto py-4">
+        <div class="grid md:grid-cols-2 gap-12 items-center">
+          <div class="space-y-6">
+            <h1 class="text-5xl font-bold leading-tight">
+              Smart Task Management for
+              <span class="text-yellow-300">Educational Excellence</span>
+            </h1>
+            <p class="text-xl text-blue-100 leading-relaxed">Streamline your educational workflow with Pathshala TMS. Organize assignments, track progress, manage deadlines, and boost productivity for students and educators.</p>
+            <div class="flex flex-col sm:flex-row gap-4">
+              <button class="bg-yellow-400 hover:bg-yellow-500 text-blue-900 px-8 py-4 rounded-lg font-semibold text-lg transition-all duration-300 transform hover:scale-105 shadow-lg">Start Free Trial</button>
+              <button class="border-2 border-white text-white hover:bg-white hover:text-blue-800 px-8 py-4 rounded-lg font-semibold text-lg transition-all duration-300">Watch Demo</button>
+            </div>
+          </div>
+          <div class="text-center">
+            <div class="bg-white bg-opacity-10 backdrop-blur-sm rounded-2xl p-8 shadow-2xl">
+              <div class="bg-yellow-400 w-24 h-24 rounded-full mx-auto mb-6 flex items-center justify-center">
+                <svg class="w-12 h-12 text-blue-800" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
+                </svg>
+              </div>
+              <h3 class="text-2xl font-bold mb-4">Trusted by 500+ Educators</h3>
+              <p class="text-blue-100">Join thousands of teachers and students who use Pathshala TMS to organize their academic tasks efficiently.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Features Section -->
+  <section class="py-12 bg-gray-50">
+    <div class="container mx-auto px-6">
+      <div class="text-center mb-12">
+        <h2 class="text-4xl font-bold text-gray-800 mb-4">Why Choose Pathshala TMS?</h2>
+        <p class="text-xl text-gray-600 max-w-3xl mx-auto">Our comprehensive task management system provides everything you need to organize, track, and complete educational tasks efficiently.</p>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Feature 1 -->
+        <div class="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-300 border border-gray-100">
+          <div class="bg-blue-100 w-16 h-16 rounded-xl flex items-center justify-center mb-6">
+            <svg class="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4" />
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold text-gray-800 mb-4">Task Organization</h3>
+          <p class="text-gray-600">Create, categorize, and prioritize tasks with intuitive drag-and-drop interface. Keep all assignments organized in one place.</p>
+        </div>
+
+        <!-- Feature 2 -->
+        <div class="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-300 border border-gray-100">
+          <div class="bg-green-100 w-16 h-16 rounded-xl flex items-center justify-center mb-6">
+            <svg class="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold text-gray-800 mb-4">Deadline Management</h3>
+          <p class="text-gray-600">Never miss a deadline again. Set reminders, track due dates, and get notifications for upcoming assignments.</p>
+        </div>
+
+        <!-- Feature 3 -->
+        <div class="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-300 border border-gray-100">
+          <div class="bg-purple-100 w-16 h-16 rounded-xl flex items-center justify-center mb-6">
+            <svg class="w-8 h-8 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold text-gray-800 mb-4">Team Collaboration</h3>
+          <p class="text-gray-600">Work together on group projects. Share tasks, assign responsibilities, and track team progress in real-time.</p>
+        </div>
+
+        <!-- Feature 4 -->
+        <div class="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-300 border border-gray-100">
+          <div class="bg-orange-100 w-16 h-16 rounded-xl flex items-center justify-center mb-6">
+            <svg class="w-8 h-8 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold text-gray-800 mb-4">Progress Tracking</h3>
+          <p class="text-gray-600">Monitor your academic progress with detailed analytics. Visualize completion rates and productivity trends.</p>
+        </div>
+
+        <!-- Feature 5 -->
+        <div class="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-300 border border-gray-100">
+          <div class="bg-red-100 w-16 h-16 rounded-xl flex items-center justify-center mb-6">
+            <svg class="w-8 h-8 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-5 5V17zm-5-5h5l-5 5v-5zm5-5h5l-5 5V7z" />
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold text-gray-800 mb-4">Priority Management</h3>
+          <p class="text-gray-600">Set task priorities and focus on what matters most. Smart algorithms help you optimize your study schedule.</p>
+        </div>
+
+        <!-- Feature 6 -->
+        <div class="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-300 border border-gray-100">
+          <div class="bg-indigo-100 w-16 h-16 rounded-xl flex items-center justify-center mb-6">
+            <svg class="w-8 h-8 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z" />
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold text-gray-800 mb-4">Multi-Platform Access</h3>
+          <p class="text-gray-600">Access your tasks anywhere, anytime. Available on web, mobile, and desktop platforms with seamless sync.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Benefits Section -->
+  <section class="py-12 bg-white">
+    <div class="container mx-auto px-6">
+      <div class="grid lg:grid-cols-2 gap-12 items-center">
+        <div class="space-y-8">
+          <h2 class="text-4xl font-bold text-gray-800">Transform Your Academic Productivity</h2>
+          <p class="text-lg text-gray-600">Pathshala TMS is designed specifically for educational environments, helping students and teachers manage their academic workload more effectively.</p>
+
+          <div class="space-y-6">
+            <div class="flex items-start space-x-4">
+              <div class="bg-green-100 rounded-full p-2 mt-1">
+                <svg class="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+              </div>
+              <div>
+                <h3 class="text-xl font-semibold text-gray-800 mb-2">Improved Organization</h3>
+                <p class="text-gray-600">Keep all your assignments, projects, and deadlines organized in one centralized system.</p>
+              </div>
+            </div>
+
+            <div class="flex items-start space-x-4">
+              <div class="bg-green-100 rounded-full p-2 mt-1">
+                <svg class="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+              </div>
+              <div>
+                <h3 class="text-xl font-semibold text-gray-800 mb-2">Better Time Management</h3>
+                <p class="text-gray-600">Allocate time effectively with smart scheduling and deadline tracking features.</p>
+              </div>
+            </div>
+
+            <div class="flex items-start space-x-4">
+              <div class="bg-green-100 rounded-full p-2 mt-1">
+                <svg class="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+              </div>
+              <div>
+                <h3 class="text-xl font-semibold text-gray-800 mb-2">Enhanced Collaboration</h3>
+                <p class="text-gray-600">Work seamlessly with classmates and teachers on group projects and assignments.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-gradient-to-br from-blue-50 to-indigo-100 rounded-3xl p-8">
+          <div class="bg-white rounded-2xl p-6 shadow-lg">
+            <h3 class="text-2xl font-bold text-gray-800 mb-6 text-center">Quick Stats</h3>
+            <div class="grid grid-cols-2 gap-6">
+              <div class="text-center">
+                <div class="text-3xl font-bold text-blue-600 mb-2">98%</div>
+                <div class="text-sm text-gray-600">Task Completion Rate</div>
+              </div>
+              <div class="text-center">
+                <div class="text-3xl font-bold text-green-600 mb-2">45%</div>
+                <div class="text-sm text-gray-600">Time Saved Weekly</div>
+              </div>
+              <div class="text-center">
+                <div class="text-3xl font-bold text-purple-600 mb-2">500+</div>
+                <div class="text-sm text-gray-600">Active Users</div>
+              </div>
+              <div class="text-center">
+                <div class="text-3xl font-bold text-orange-600 mb-2">24/7</div>
+                <div class="text-sm text-gray-600">Support Available</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing Section -->
+  <section class="py-12 bg-gray-50">
+    <div class="container mx-auto px-6">
+      <div class="text-center mb-12">
+        <h2 class="text-4xl font-bold text-gray-800 mb-4">Choose Your Plan</h2>
+        <p class="text-xl text-gray-600">Start free and upgrade as you grow</p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+        <!-- Free Plan -->
+        <div class="bg-white rounded-2xl p-8 shadow-lg border border-gray-200">
+          <div class="text-center mb-8">
+            <h3 class="text-2xl font-bold text-gray-800 mb-2">Student</h3>
+            <div class="text-4xl font-bold text-gray-800 mb-1">Free</div>
+            <p class="text-gray-600">Perfect for individual students</p>
+          </div>
+          <ul class="space-y-4 mb-8">
+            <li class="flex items-center space-x-3">
+              <svg class="w-5 h-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              </svg>
+              <span class="text-gray-600">Up to 50 tasks</span>
+            </li>
+            <li class="flex items-center space-x-3">
+              <svg class="w-5 h-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              </svg>
+              <span class="text-gray-600">Basic deadline tracking</span>
+            </li>
+            <li class="flex items-center space-x-3">
+              <svg class="w-5 h-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              </svg>
+              <span class="text-gray-600">Mobile app access</span>
+            </li>
+          </ul>
+          <button class="w-full bg-gray-100 hover:bg-gray-200 text-gray-800 py-3 rounded-lg font-semibold transition-colors duration-300">Get Started</button>
+        </div>
+
+        <!-- Pro Plan -->
+        <div class="bg-blue-600 rounded-2xl p-8 shadow-xl text-white relative transform scale-105">
+          <div class="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+            <span class="bg-yellow-400 text-blue-900 px-4 py-1 rounded-full text-sm font-semibold">Most Popular</span>
+          </div>
+          <div class="text-center mb-8">
+            <h3 class="text-2xl font-bold mb-2">Teacher</h3>
+            <div class="text-4xl font-bold mb-1">$9.99</div>
+            <p class="text-blue-100">per month, perfect for educators</p>
+          </div>
+          <ul class="space-y-4 mb-8">
+            <li class="flex items-center space-x-3">
+              <svg class="w-5 h-5 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              </svg>
+              <span>Unlimited tasks</span>
+            </li>
+            <li class="flex items-center space-x-3">
+              <svg class="w-5 h-5 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              </svg>
+              <span>Team collaboration</span>
+            </li>
+            <li class="flex items-center space-x-3">
+              <svg class="w-5 h-5 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              </svg>
+              <span>Advanced analytics</span>
+            </li>
+            <li class="flex items-center space-x-3">
+              <svg class="w-5 h-5 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              </svg>
+              <span>Priority support</span>
+            </li>
+          </ul>
+          <button class="w-full bg-yellow-400 hover:bg-yellow-500 text-blue-900 py-3 rounded-lg font-semibold transition-colors duration-300">Start Free Trial</button>
+        </div>
+
+        <!-- Enterprise Plan -->
+        <div class="bg-white rounded-2xl p-8 shadow-lg border border-gray-200">
+          <div class="text-center mb-8">
+            <h3 class="text-2xl font-bold text-gray-800 mb-2">Institution</h3>
+            <div class="text-4xl font-bold text-gray-800 mb-1">Custom</div>
+            <p class="text-gray-600">For schools and universities</p>
+          </div>
+          <ul class="space-y-4 mb-8">
+            <li class="flex items-center space-x-3">
+              <svg class="w-5 h-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              </svg>
+              <span class="text-gray-600">Everything in Teacher</span>
+            </li>
+            <li class="flex items-center space-x-3">
+              <svg class="w-5 h-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              </svg>
+              <span class="text-gray-600">Custom integrations</span>
+            </li>
+            <li class="flex items-center space-x-3">
+              <svg class="w-5 h-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              </svg>
+              <span class="text-gray-600">Dedicated support</span>
+            </li>
+          </ul>
+          <button class="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-lg font-semibold transition-colors duration-300">Contact Sales</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="py-12 bg-gradient-to-br from-blue-600 via-purple-600 to-indigo-700 text-white">
+    <div class="container mx-auto px-6 text-center">
+      <h2 class="text-4xl font-bold mb-6">Ready to Transform Your Academic Workflow?</h2>
+      <p class="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">Join thousands of students and educators who have improved their productivity with Pathshala TMS.</p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <button class="bg-yellow-400 hover:bg-yellow-500 text-blue-900 px-8 py-4 rounded-lg font-semibold text-lg transition-all duration-300 transform hover:scale-105">Start Your Free Trial</button>
+        <button class="border-2 border-white text-white hover:bg-white hover:text-blue-600 px-8 py-4 rounded-lg font-semibold text-lg transition-all duration-300">Schedule Demo</button>
+      </div>
+      <p class="text-blue-200 text-sm mt-4">No credit card required • 14-day free trial • Cancel anytime</p>
+    </div>
+  </section>
 {% endblock %}

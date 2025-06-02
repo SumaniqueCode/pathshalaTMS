@@ -6,60 +6,188 @@
     <title>Pathshala TMS</title>
     <script src="https://cdn.tailwindcss.com"></script>
   </head>
-  <body>
-    <nav class="bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-700">
-      <div class="max-w-screen-xl mx-auto px-4 py-3 flex items-center justify-between">
-        
-        <!-- Logo -->
-        <a href="#" class="flex items-center space-x-2">
-          <img src="/media/system_image/logo.png" class="h-16 rounded-full" alt="Logo" />
-          <span class="text-2xl font-semibold text-gray-900 dark:text-white">Pathshala TMS</span>
-        </a>
+  <body class="bg-gray-50 dark:bg-gray-900 notification relative">
+    {% if messages %}
+      <div class="fixed top-20 right-0 space-y-2 z-10" data-dismiss>
+        {% for message in messages %}
+          {% if message.tags == 'success' %}
+            <div class="px-4 py-3 rounded shadow bg-green-500 text-white">{{ message }}</div>
+          {% elif message.tags == 'error' %}
+            <div class="px-4 py-3 rounded shadow bg-red-500 text-white">{{ message }}</div>
+          {% elif message.tags == 'warning' %}
+            <div class="px-4 py-3 rounded shadow bg-yellow-500 text-black">{{ message }}</div>
+          {% else %}
+            <div class="px-4 py-3 rounded shadow bg-gray-500 text-white">{{ message }}</div>
+          {% endif %}
+        {% endfor %}
+      </div>
+    {% endif %}
 
-        <!-- Hamburger (mobile) -->
-        <div class="md:hidden">
-          <input id="menu-toggle" type="checkbox" class="hidden peer" />
-          <label for="menu-toggle" class="cursor-pointer p-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700">
-            <svg class="w-6 h-6 text-gray-800 dark:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                d="M4 6h16M4 12h16M4 18h16" />
-            </svg>
-          </label>
+    <script>
+      setTimeout(() => {
+        document.querySelectorAll('[data-dismiss]').forEach((el) => el.remove())
+      }, 3000)
+    </script>
+    <!-- Navigation -->
+    <nav class="bg-white dark:bg-gray-800 shadow-lg border-b border-gray-200 dark:border-gray-700 sticky top-0 z-50">
+      <div class="max-w-[95%] mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between h-16">
+          <!-- Logo -->
+          <!-- Logo -->
+          <a href="#" class="flex items-center space-x-2">
+            <img src="/media/system_image/logo.png" class="h-12 rounded-full" alt="Logo" />
+            <span class="text-2xl font-semibold text-gray-900 dark:text-white">Pathshala TMS</span>
+          </a>
 
-          <!-- Mobile Menu -->
-          <div class="absolute z-100 left-0 top-20 w-full hidden peer-checked:block bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700">
-            <ul class="flex flex-col items-center space-y-2 py-4">
-              <li><a href="#" class="block px-4 py-2 text-gray-800 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded">Home</a></li>
-              <li><a href="#" class="block px-4 py-2 text-gray-800 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded">About</a></li>
-              <li><a href="#" class="block px-4 py-2 text-gray-800 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded">Services</a></li>
-              <li><a href="#" class="block px-4 py-2 text-gray-800 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded">Contact</a></li>
-              <li><a href="/login" class="block px-4 py-2 text-gray-800 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded">Login</a></li>
-              <li><a href="/register" class="block px-4 py-2 text-gray-800 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded">Register</a></li>
-            </ul>
+          <!-- Desktop Navigation -->
+          <div class="hidden md:block">
+            <div class="ml-10 flex items-baseline space-x-8">
+              <a href="/" class="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 font-medium px-3 py-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 transition-all duration-200">Home</a>
+              <a href="/about" class="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 font-medium px-3 py-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 transition-all duration-200">About</a>
+              <a href="/services" class="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 font-medium px-3 py-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 transition-all duration-200">Services</a>
+              <a href="/contact" class="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 font-medium px-3 py-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 transition-all duration-200">Contact</a>
+            </div>
           </div>
-        </div>
 
-        <!-- Desktop Nav -->
-        <div class="hidden md:flex flex-1 items-center justify-center space-x-6">
-          <a href="#" class="text-gray-800 dark:text-white hover:text-blue-600">Home</a>
-          <a href="#" class="text-gray-800 dark:text-white hover:text-blue-600">About</a>
-          <a href="#" class="text-gray-800 dark:text-white hover:text-blue-600">Services</a>
-          <a href="#" class="text-gray-800 dark:text-white hover:text-blue-600">Contact</a>
-        </div>
+          <!-- Desktop Auth Buttons -->
+          <div class="hidden md:flex items-center space-x-4">
+            <a href="/login" class="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 font-medium px-4 py-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 transition-all duration-200">Login</a>
+            <a href="/register" class="bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white px-6 py-2 rounded-lg font-medium shadow-md hover:shadow-lg transform hover:-translate-y-0.5 transition-all duration-200">Register</a>
+          </div>
 
-        <div class="hidden md:flex space-x-4 items-center">
-          <a href="/login" class="text-gray-800 dark:text-white hover:text-blue-600">Login</a>
-          <a href="/register" class="text-gray-800 dark:text-white hover:text-blue-600">Register</a>
+          <!-- Mobile menu button -->
+          <div class="md:hidden">
+            <input id="menu-toggle" type="checkbox" class="hidden peer" />
+            <label for="menu-toggle" class="cursor-pointer p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors duration-200">
+              <svg class="w-6 h-6 text-gray-700 dark:text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+              </svg>
+            </label>
+
+            <!-- Mobile Menu -->
+            <div class="absolute top-16 left-0 right-0 hidden peer-checked:block bg-white dark:bg-gray-800 shadow-lg border-t border-gray-200 dark:border-gray-700">
+              <div class="px-2 pt-2 pb-3 space-y-1">
+                <a href="#" class="block px-3 py-2 text-gray-700 dark:text-gray-300 hover:text-blue-600 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg font-medium transition-all duration-200">Home</a>
+                <a href="#" class="block px-3 py-2 text-gray-700 dark:text-gray-300 hover:text-blue-600 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg font-medium transition-all duration-200">About</a>
+                <a href="#" class="block px-3 py-2 text-gray-700 dark:text-gray-300 hover:text-blue-600 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg font-medium transition-all duration-200">Services</a>
+                <a href="#" class="block px-3 py-2 text-gray-700 dark:text-gray-300 hover:text-blue-600 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg font-medium transition-all duration-200">Contact</a>
+                <div class="border-t border-gray-200 dark:border-gray-700 pt-2 mt-2">
+                  <a href="/login" class="block px-3 py-2 text-gray-700 dark:text-gray-300 hover:text-blue-600 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg font-medium transition-all duration-200">Login</a>
+                  <a href="/register" class="block mx-3 my-2 px-3 py-2 bg-gradient-to-r from-blue-500 to-blue-600 text-white text-center rounded-lg font-medium shadow-md">Register</a>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </nav>
 
-    <div class="min-h-[82vh] bg-gradient-to-br from-slate-50 to-blue-50">
-      {% block content %}{% endblock %}
+    <!-- Main Content -->
+    <div class="min-h-[60vh] bg-gradient-to-br from-slate-50 to-blue-50 dark:from-gray-800 dark:to-gray-900">
+      {% block content %}
+
+      {% endblock %}
     </div>
 
-    <footer class="flex bg-black text-white py-4 rounded-xl">
-      <div class="mx-auto text-lg font-semibold">&copy; Pathshala TMS. 2025</div>
+    <!-- Professional Footer -->
+    <footer class="bg-gray-900 text-white">
+      <div class="max-w-[95%] mx-auto px-4 sm:px-6 lg:px-8 py-6">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+          <!-- Company Info -->
+          <div class="space-y-4">
+            <div class="flex items-center space-x-3">
+              <div class="w-8 h-8 bg-gradient-to-r from-blue-500 to-blue-700 rounded-lg flex items-center justify-center">
+                <span class="text-white font-bold">P</span>
+              </div>
+              <span class="text-xl font-bold">Pathshala TMS</span>
+            </div>
+            <p class="text-gray-400 text-sm leading-relaxed">Empowering education through innovative technology solutions and comprehensive management systems for the digital age.</p>
+            <div class="flex space-x-4">
+              <div class="w-8 h-8 bg-gray-700 hover:bg-blue-600 rounded-lg flex items-center justify-center cursor-pointer transition-colors duration-200">
+                <span class="text-sm">📘</span>
+              </div>
+              <div class="w-8 h-8 bg-gray-700 hover:bg-blue-400 rounded-lg flex items-center justify-center cursor-pointer transition-colors duration-200">
+                <span class="text-sm">🐦</span>
+              </div>
+              <div class="w-8 h-8 bg-gray-700 hover:bg-blue-700 rounded-lg flex items-center justify-center cursor-pointer transition-colors duration-200">
+                <span class="text-sm">💼</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Quick Links -->
+          <div>
+            <h3 class="text-lg font-semibold mb-4 text-white">Quick Links</h3>
+            <ul class="space-y-3">
+              <li>
+                <a href="/home" class="text-gray-400 hover:text-white transition-colors duration-200 block">Home</a>
+              </li>
+              <li>
+                <a href="/about" class="text-gray-400 hover:text-white transition-colors duration-200 block">About Us</a>
+              </li>
+              <li>
+                <a href="/services" class="text-gray-400 hover:text-white transition-colors duration-200 block">Our Services</a>
+              </li>
+              <li>
+                <a href="/contact" class="text-gray-400 hover:text-white transition-colors duration-200 block">Contact</a>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Support -->
+          <div>
+            <h3 class="text-lg font-semibold mb-4 text-white">Support</h3>
+            <ul class="space-y-3">
+              <li>
+                <a href="/help" class="text-gray-400 hover:text-white transition-colors duration-200 block">Help Center</a>
+              </li>
+              <li>
+                <a href="/docs" class="text-gray-400 hover:text-white transition-colors duration-200 block">Documentation</a>
+              </li>
+              <li>
+                <a href="/policies" class="text-gray-400 hover:text-white transition-colors duration-200 block">Privacy Policy</a>
+              </li>
+              <li>
+                <a href="/terms" class="text-gray-400 hover:text-white transition-colors duration-200 block">Terms of Service</a>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Contact -->
+          <div>
+            <h3 class="text-lg font-semibold mb-4 text-white">Get in Touch</h3>
+            <div class="space-y-3 text-gray-400 text-sm">
+              <div class="flex items-center space-x-2">
+                <span>📧</span>
+                <span>info@pathshalatms.com</span>
+              </div>
+              <div class="flex items-center space-x-2">
+                <span>📞</span>
+                <span>+1 (555) 123-4567</span>
+              </div>
+              <div class="flex items-center space-x-2">
+                <span>📍</span>
+                <span>123 Education St, Learning City</span>
+              </div>
+              <div class="flex items-center space-x-2">
+                <span>🕒</span>
+                <span>Mon-Fri: 9AM-6PM</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="border-t border-gray-800 mt-12 pt-8">
+          <div class="flex flex-col md:flex-row justify-between items-center">
+            <p class="text-gray-400 text-sm">&copy; 2025 Pathshala TMS. All rights reserved. Built with ❤️ for education.</p>
+            <div class="flex space-x-6 mt-4 md:mt-0">
+              <a href="/privacy" class="text-gray-400 hover:text-white text-sm transition-colors duration-200">Privacy</a>
+              <a href="/terms" class="text-gray-400 hover:text-white text-sm transition-colors duration-200">Terms</a>
+              <a href="/cookies" class="text-gray-400 hover:text-white text-sm transition-colors duration-200">Cookies</a>
+            </div>
+          </div>
+        </div>
+      </div>
     </footer>
   </body>
 </html>

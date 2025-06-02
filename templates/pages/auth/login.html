@@ -1,71 +1,54 @@
 {% extends 'layouts\main.html' %}
 
 {% block content %}
-  <div class="flex items-center justify-center p-2">
+  <div class="flex items-center justify-center p-2 my-4">
     <div class="w-full max-w-lg">
       <form method="post" action="/login-user" class="bg-white shadow-2xl rounded-2xl border border-gray-100 overflow-hidden">
         {% csrf_token %}
-        
+
         <!-- Header Section -->
         <div class="bg-gradient-to-r from-blue-600 to-blue-700 px-8 py-2 text-center">
           <h2 class="text-2xl font-bold text-white">Welcome Back</h2>
           <p class="text-blue-100 text-sm mt-1">Please sign in to your account</p>
         </div>
-        
+
         <!-- Form Section -->
         <div class="px-8 py-4 space-y-3">
           <!-- Username Field -->
           <div class="space-y-2">
-            <label for="username" class="block text-sm font-semibold text-gray-700">
-              Username
-            </label>
-            <input 
-              type="text" 
-              id="username"
-              name="username" 
-              class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200 bg-gray-50 focus:bg-white"
-              placeholder="Enter your username"
-              required
-            />
+            <label for="username" class="block text-sm font-semibold text-gray-700">Username</label>
+            <input type="text" id="username" name="username" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200 bg-gray-50 focus:bg-white" placeholder="Enter your username" required />
+            {% if errors %}
+              <span class="text-red-500">{{ errors.username }}</span>
+            {% endif %}
           </div>
-          
+
           <!-- Password Field -->
           <div class="space-y-2">
-            <label for="password" class="block text-sm font-semibold text-gray-700">
-              Password
-            </label>
-            <input 
-              type="password" 
-              id="password"
-              name="password" 
-              class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200 bg-gray-50 focus:bg-white"
-              placeholder="Enter your password"
-              required
-            />
+            <label for="password" class="block text-sm font-semibold text-gray-700">Password</label>
+            <input type="password" id="password" name="password" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200 bg-gray-50 focus:bg-white" placeholder="Enter your password" required />
+            {% if errors %}
+              <span class="text-red-500">{{ errors.password}}</span>
+            {% endif %}
           </div>
-          
+
           <!-- Remember Me & Forgot Password -->
           <div class="flex items-center justify-between text-sm">
             <label class="flex items-center">
-              <input type="checkbox" class="rounded border-gray-300 text-blue-600 focus:ring-blue-500">
+              <input type="checkbox" class="rounded border-gray-300 text-blue-600 focus:ring-blue-500" />
               <span class="ml-2 text-gray-600">Remember me</span>
             </label>
             <a href="#" class="text-blue-600 hover:text-blue-700 font-medium">Forgot password?</a>
           </div>
-          
+
           <!-- Submit Button -->
-          <button 
-            type="submit" 
-            class="w-full bg-gradient-to-r from-blue-600 to-blue-700 text-white py-3 px-4 rounded-lg font-semibold hover:from-blue-700 hover:to-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
-          >
-            Sign In
-          </button>
+          <button type="submit" class="w-full bg-gradient-to-r from-blue-600 to-blue-700 text-white py-3 px-4 rounded-lg font-semibold hover:from-blue-700 hover:to-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">Sign In</button>
         </div>
-        
+
         <!-- Footer Section -->
         <div class="px-8 pb-4 bg-gray-50 border-t border-gray-100 text-center">
           <p class="text-sm text-gray-600">
-            Don't have an account? 
+            Don't have an account?
             <a href="#" class="text-blue-600 hover:text-blue-700 font-medium">Sign up here</a>
           </p>
         </div>

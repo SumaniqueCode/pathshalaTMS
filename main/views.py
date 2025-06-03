@@ -1,8 +1,8 @@
-from pyexpat.errors import messages
 from django.shortcuts import redirect, render
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth import authenticate, login
+from user.models import Profile
 
 def index(request):
     return render(request, 'pages/index.html')
@@ -19,6 +19,11 @@ def registerUser(request):
         email = request.POST.get('email')
         password = request.POST.get('password')
         confirm_password = request.POST.get('confirm_password')
+        name = request.POST.get('name')
+        phone = request.POST.get('phone')
+        address = request.POST.get('address')
+        gender = request.POST.get('gender')
+        
         if User.objects.filter(username=username).exists():
             return render (request, 'pages/auth/register.html',{ "errors":{'username': 'Username already exists.'}})
         if User.objects.filter(email=email).exists():
@@ -26,7 +31,9 @@ def registerUser(request):
         if password != confirm_password:
             return render (request, 'pages/auth/register.html', { "errors":{'password':'passwords do not match'}})
         user = User.objects.create_user(username, email, password)
+        profile = Profile.objects.create(user, name, phone, address, gender, role="employee")
         messages.success(request, "User created successfully")
+        profile.save()
         user.save()
         return redirect('/login')
     

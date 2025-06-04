@@ -1,0 +1,22 @@
+{% extends 'layouts/main.html' %}
+{% block content %}
+  <div class="flex flex-col gap-4 items-center justify-center mt-6">
+    <div class="border-4 border-blue-500 rounded-lg w-2/5 p-6">
+      <div class="flex mb-4">
+        <img class="h-24 border-2 border-black rounded-full mx-auto" src="/media/{{ user.profile.image }}" alt="Profile Image" />
+      </div>
+      <div class="grid grid-cols-2 gap-4 text-lg font-semibold">
+        <p class="text-right">Name:</p>
+        <p>{{ user.profile.name }}</p>
+        <p class="text-right" >Username:</p> <p>{{ user.username }}</p>
+        <p class="text-right">Email:</p> <p>{{ user.email }}</p>
+        <p class="text-right">Gender:</p> <p>{{ user.profile.gender }}</p>
+        <p class="text-right">Role:</p> <p>{{ user.profile.role }}</p>
+      </div>
+    </div>
+    <div class="flex gap-12">
+      <a href="/edit" class="bg-blue-600 px-6 py-2 text-white font-bold rounded-md">Edit</a>
+      <a href="/logout" class="bg-red-600 px-6 py-2 text-white font-bold rounded-md">Logout</a>
+    </div>
+  </div>
+{% endblock %}

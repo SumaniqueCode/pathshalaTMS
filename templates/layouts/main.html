@@ -49,11 +49,17 @@
             </div>
           </div>
 
-          <!-- Desktop Auth Buttons -->
-          <div class="hidden md:flex items-center space-x-4">
-            <a href="/login" class="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 font-medium px-4 py-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 transition-all duration-200">Login</a>
-            <a href="/register" class="bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white px-6 py-2 rounded-lg font-medium shadow-md hover:shadow-lg transform hover:-translate-y-0.5 transition-all duration-200">Register</a>
-          </div>
+          {% if user.is_authenticated %}
+            <div class="hidden md:flex items-center space-x-4">
+              <a href="/profile" class="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 font-medium px-4 py-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 transition-all duration-200">Profile</a>
+            </div>
+          {% else %}
+            <!-- Desktop Auth Buttons -->
+            <div class="hidden md:flex items-center space-x-4">
+              <a href="/login" class="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 font-medium px-4 py-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 transition-all duration-200">Login</a>
+              <a href="/register" class="bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white px-6 py-2 rounded-lg font-medium shadow-md hover:shadow-lg transform hover:-translate-y-0.5 transition-all duration-200">Register</a>
+            </div>
+          {% endif %}
 
           <!-- Mobile menu button -->
           <div class="md:hidden">
@@ -67,14 +73,20 @@
             <!-- Mobile Menu -->
             <div class="absolute top-16 left-0 right-0 hidden peer-checked:block bg-white dark:bg-gray-800 shadow-lg border-t border-gray-200 dark:border-gray-700">
               <div class="px-2 pt-2 pb-3 space-y-1">
-                <a href="#" class="block px-3 py-2 text-gray-700 dark:text-gray-300 hover:text-blue-600 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg font-medium transition-all duration-200">Home</a>
-                <a href="#" class="block px-3 py-2 text-gray-700 dark:text-gray-300 hover:text-blue-600 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg font-medium transition-all duration-200">About</a>
+                <a href="/home" class="block px-3 py-2 text-gray-700 dark:text-gray-300 hover:text-blue-600 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg font-medium transition-all duration-200">Home</a>
+                <a href="/about" class="block px-3 py-2 text-gray-700 dark:text-gray-300 hover:text-blue-600 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg font-medium transition-all duration-200">About</a>
                 <a href="#" class="block px-3 py-2 text-gray-700 dark:text-gray-300 hover:text-blue-600 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg font-medium transition-all duration-200">Services</a>
                 <a href="#" class="block px-3 py-2 text-gray-700 dark:text-gray-300 hover:text-blue-600 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg font-medium transition-all duration-200">Contact</a>
-                <div class="border-t border-gray-200 dark:border-gray-700 pt-2 mt-2">
-                  <a href="/login" class="block px-3 py-2 text-gray-700 dark:text-gray-300 hover:text-blue-600 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg font-medium transition-all duration-200">Login</a>
-                  <a href="/register" class="block mx-3 my-2 px-3 py-2 bg-gradient-to-r from-blue-500 to-blue-600 text-white text-center rounded-lg font-medium shadow-md">Register</a>
-                </div>
+                {% if user.is_authenticated %}
+                  <div class="border-t border-gray-200 dark:border-gray-700 pt-2 mt-2">
+                    <a href="/profile" class="block px-3 py-2 text-gray-700 dark:text-gray-300 hover:text-blue-600 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg font-medium transition-all duration-200">Profile</a>
+                  </div>
+                {% else %}
+                  <div class="border-t border-gray-200 dark:border-gray-700 pt-2 mt-2">
+                    <a href="/login" class="block px-3 py-2 text-gray-700 dark:text-gray-300 hover:text-blue-600 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg font-medium transition-all duration-200">Login</a>
+                    <a href="/register" class="block mx-3 my-2 px-3 py-2 bg-gradient-to-r from-blue-500 to-blue-600 text-white text-center rounded-lg font-medium shadow-md">Register</a>
+                  </div>
+                {% endif %}
               </div>
             </div>
           </div>

@@ -31,9 +31,9 @@ def registerUser(request):
         if password != confirm_password:
             return render (request, 'pages/auth/register.html', { "errors":{'password':'passwords do not match'}})
         user = User.objects.create_user(username, email, password)
-        profile = Profile.objects.create(user, name, phone, address, gender, role="employee")
-        messages.success(request, "User created successfully")
+        profile = Profile(user=user, name=name, phone=phone, address=address, gender=gender, role="employee")
         profile.save()
+        messages.success(request, "User created successfully")
         user.save()
         return redirect('/login')
     
@@ -47,8 +47,15 @@ def loginUser(request):
             if authenticated_user:
                 login(request, authenticated_user)
                 messages.success(request, "User Logged in successfully")
+                if authenticated_user.profile.role == 'employee':
+                    return redirect('/employee/dashboard')
+                if authenticated_user.profile.role == 'employer':
+                    return redirect('/employer/dashboard')
                 return redirect('/')
             else:
                 return render(request, 'pages/auth/login.html',{"errors":{"password":"Invalid password"}})
         else:
             return render(request, 'pages/auth/login.html',{"errors":{"username":"Invalid Username"}})
+
+def employerDashboard(request):
+    return render(request, 'pages/employer/dashboard.html')

@@ -19,10 +19,13 @@ def registerUser(request):
         email = request.POST.get('email')
         password = request.POST.get('password')
         confirm_password = request.POST.get('confirm_password')
-        name = request.POST.get('name')
+        first_name = request.POST.get('first_name')
+        last_name = request.POST.get('last_name')
+        dob = request.POST.get('dob')
         phone = request.POST.get('phone')
         address = request.POST.get('address')
         gender = request.POST.get('gender')
+        image = request.POST.get('image')
         
         if User.objects.filter(username=username).exists():
             return render (request, 'pages/auth/register.html',{ "errors":{'username': 'Username already exists.'}})
@@ -30,8 +33,10 @@ def registerUser(request):
             return render (request, 'pages/auth/register.html', { "errors":{'email': 'Email already exists'}})
         if password != confirm_password:
             return render (request, 'pages/auth/register.html', { "errors":{'password':'passwords do not match'}})
-        user = User.objects.create_user(username, email, password)
-        profile = Profile(user=user, name=name, phone=phone, address=address, gender=gender, role="employee")
+        if len(phone)!=10:
+            return render (request, 'pages/auth/register.html', { "errors":{'phone':'phone number should be 10 digits'}})
+        user = User.objects.create_user(username=username, email=email, password=password, first_name=first_name, last_name=last_name)
+        profile = Profile(user=user, dob=dob, phone=phone, address=address, gender=gender, role="employee", image=image)
         profile.save()
         messages.success(request, "User created successfully")
         user.save()

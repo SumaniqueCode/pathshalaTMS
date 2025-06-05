@@ -13,7 +13,7 @@ class Profile(models.Model):
         OTHER = 'other', 'Other'
     
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    name = models.CharField(blank=True, null=True, max_length=30)
+    dob = models.DateField(blank=True, null=True,)
     address = models.CharField(blank=True, null=True, max_length=100)
     phone = models.CharField(blank=True, null=True, max_length=10)
     role = models.CharField(choices=RoleOptions, default=RoleOptions.EMPLOYEE, max_length=10)

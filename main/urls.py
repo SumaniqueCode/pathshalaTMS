@@ -33,6 +33,7 @@ urlpatterns = [
     path("register", registerPage),
     path("register-user", registerUser),
     path("login-user", loginUser),
+    path('logout', logoutUser),
     path("profile", profilePage),
     path("employer/", include(employer_urlpatterns)),
 ]

@@ -3,7 +3,7 @@
 {% block content %}
   <div class="flex items-center justify-center p-2 my-4">
     <div class="w-full max-w-2xl">
-      <form method="POST" action="/register-user" class="bg-white shadow-2xl rounded-2xl border border-gray-100 overflow-hidden">
+      <form method="POST" action="/register-user" enctype="multipart/form-data" class="bg-white shadow-2xl rounded-2xl border border-gray-100 overflow-hidden">
         {% csrf_token %}
         <!-- Header Section -->
         <div class="bg-gradient-to-r from-blue-600 to-blue-700 px-8 py-2 text-center">
@@ -14,12 +14,21 @@
         <!-- Form Section -->
         <div class="px-8 py-4 space-y-3">
           <!-- Name Field -->
-          <div class="space-y-2">
-            <label for="username" class="block text-sm font-semibold text-gray-700">Full Name</label>
-            <input type="text" id="name" name="name" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200 bg-gray-50 focus:bg-white" placeholder="Enter full name" required />
-            {% if errors %}
-              <span class="text-red-500">{{ errors.name }}</span>
-            {% endif %}
+          <div class="grid grid-cols-2 gap-2">
+            <div class="space-y-2">
+              <label for="first_name" class="block text-sm font-semibold text-gray-700">First Name</label>
+              <input type="text" id="first_name" name="first_name" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200 bg-gray-50 focus:bg-white" placeholder="Enter first name" required />
+              {% if errors %}
+                <span class="text-red-500">{{ errors.first_name }}</span>
+              {% endif %}
+            </div>
+            <div class="space-y-2">
+              <label for="last_name" class="block text-sm font-semibold text-gray-700">Last Name</label>
+              <input type="text" id="last_name" name="last_name" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200 bg-gray-50 focus:bg-white" placeholder="Enter last name" required />
+              {% if errors %}
+                <span class="text-red-500">{{ errors.last_name }}</span>
+              {% endif %}
+            </div>
           </div>
           <!-- Username Field -->
           <div class="space-y-2">
@@ -46,14 +55,24 @@
               <span class="text-red-500">{{ errors.address }}</span>
             {% endif %}
           </div>
-          <!-- Gender Field -->
-          <div class="space-y-2">
-            <label for="gender" class="block text-sm font-semibold text-gray-700">Gender</label>
-            <select id="gender" name="gender" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200 bg-gray-50 focus:bg-white" required>
-              <option value="male">Male</option>
-              <option value="female">Female</option>
-              <option value="other">Other</option>
-            </select>
+          <div class="grid grid-cols-2 gap-2">
+            <!-- Gender Field -->
+            <div class="space-y-2">
+              <label for="gender" class="block text-sm font-semibold text-gray-700">Gender</label>
+              <select id="gender" name="gender" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200 bg-gray-50 focus:bg-white" required>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+            <!-- DOB Field -->
+            <div class="space-y-2">
+              <label for="dob" class="block text-sm font-semibold text-gray-700">Date of Birth</label>
+              <input type="date" id="dob" name="dob" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200 bg-gray-50 focus:bg-white" required />
+              {% if errors %}
+                <span class="text-red-500">{{ errors.dob }}</span>
+              {% endif %}
+            </div>
           </div>
 
           <!-- Address Field -->
@@ -76,10 +95,19 @@
 
           <!-- Confirm Password Field -->
           <div class="space-y-2">
-            <label for="confirm_password" class="block text-sm font-semibold text-gray-700">Confirm Password</label>
+            <label for="image" class="block text-sm font-semibold text-gray-700">Confirm Password</label>
             <input type="password" id="confirm_password" name="confirm_password" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200 bg-gray-50 focus:bg-white" placeholder="Confirm your password" required />
             {% if errors %}
               <span class="text-red-500">{{ errors.password }}</span>
+            {% endif %}
+          </div>
+
+          <!-- Image Field -->
+          <div class="space-y-2">
+            <label for="image" class="block text-sm font-semibold text-gray-700">Profile Image</label>
+            <input type="file" id="image" name="image" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200 bg-gray-50 focus:bg-white" placeholder="Confirm your password" required />
+            {% if errors %}
+              <span class="text-red-500">{{ errors.image }}</span>
             {% endif %}
           </div>
 

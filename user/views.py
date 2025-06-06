@@ -1,20 +1,19 @@
 from django.shortcuts import redirect, render
-from django.contrib.auth import logout
+from django.contrib.auth import logout, authenticate, login
 from django.contrib import messages
 
 
 def profilePage(request):
-    return render(
-        request,
-        "pages/profile.html",
-    )
+    return render(request, "pages/profile.html")
 
+def editProfilePage(request):
+    return render(request, "pages/auth/edit_profile.html")
+    
 
 def logoutUser(request):
     logout(request)
     messages.success(request, "You have been logged out")
     return redirect("/")
-
 
 def editProfile(request):
     errors = {}
@@ -44,13 +43,18 @@ def editProfile(request):
 
         user.first_name = first_name
         user.last_name = last_name
-        user.password = password
-        profile.image = image
-        profile.address = address
+        if password:
+            user.set_password(password)
+            authenticated_user = authenticate(request, username=user.username, password=password)
+            login( request, authenticated_user)
+        if image:
+            profile.image = image
         profile.dob = dob
+        profile.address = address
         profile.phone = phone
         profile.gender = gender
         user.save()
         profile.save()
-        messages.success(" Profile updated successfully")
+        
+        messages.success(request, "Profile updated successfully")
         return redirect("/profile")

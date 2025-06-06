@@ -22,9 +22,9 @@ from main import settings
 from .views import *
 from user.views import *
 
-employer_urlpatterns = [
-    path("dashboard", employerDashboard)
-    ]
+employer_urlpatterns = [path("dashboard", employerDashboard)]
+
+employee_urlpatterns = [path("dashboard", employeeDashboard)]
 
 urlpatterns = [
     path("admin/", admin.site.urls),
@@ -33,9 +33,12 @@ urlpatterns = [
     path("register", registerPage),
     path("register-user", registerUser),
     path("login-user", loginUser),
-    path('logout', logoutUser),
+    path("logout", logoutUser),
     path("profile", profilePage),
+    path("edit-profile", editProfilePage),
+    path("update-profile", editProfile),
     path("employer/", include(employer_urlpatterns)),
+    path("employee/", include(employee_urlpatterns)),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

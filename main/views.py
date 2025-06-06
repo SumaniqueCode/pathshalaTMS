@@ -64,3 +64,6 @@ def loginUser(request):
 
 def employerDashboard(request):
     return render(request, 'pages/employer/dashboard.html')
+
+def employeeDashboard(request):
+    return render(request, 'pages/employee/dashboard.html')

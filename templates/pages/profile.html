@@ -8,7 +8,11 @@
         <div class="h-24 bg-gradient-to-r from-blue-600 to-indigo-700 relative">
           <div class="absolute -bottom-16 left-1/2 transform -translate-x-1/2">
             <div class="relative">
-              <img class="w-32 h-32 rounded-full border-4 border-white shadow-lg object-cover bg-gray-200" src="/media/{{ user.profile.image }}" alt="Profile Image" />
+              {% if user.profile.image %}
+                <img class="w-32 h-32 rounded-full border-4 border-white shadow-lg object-cover bg-gray-200" src="/media/{{ user.profile.image }}" alt="Profile Image" />
+              {% else %}
+                <img class="w-32 h-32 rounded-full border-4 border-white shadow-lg object-cover bg-gray-200" src="/media/system_image/sample_user_icon.png" alt="Profile Image" />
+              {% endif %}
               <div class="absolute bottom-2 right-2 w-6 h-6 bg-green-500 rounded-full border-2 border-white"></div>
             </div>
           </div>
@@ -18,7 +22,7 @@
         <div class="pt-16 pb-8 px-8">
           <!-- Name and Role -->
           <div class="text-center mb-4">
-            <h1 class="text-3xl font-bold text-gray-900 mb-1">{{ user.first_name}} {{ user.last_name}}</h1>
+            <h1 class="text-3xl font-bold text-gray-900 mb-1">{{ user.first_name }} {{ user.last_name }}</h1>
             <p class="text-lg text-gray-600 mb-1">@{{ user.username }}</p>
             <span class="inline-flex items-center px-4 py-2 rounded-full text-sm font-medium bg-blue-100 text-blue-800">{{ user.profile.role }}</span>
           </div>

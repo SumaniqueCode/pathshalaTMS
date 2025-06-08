@@ -1,11 +1,11 @@
 {% extends 'layouts/main.html' %}
 {% block content %}
-  <div class="min-h-[80vh] bg-gradient-to-br from-slate-50 to-blue-50 py-6">
+  <div class="min-h-[80vh] bg-gradient-to-br from-slate-50 to-blue-50 py-4">
     <div class="max-w-xl mx-auto px-4">
       <!-- Single Profile Card -->
       <div class="bg-white rounded-2xl shadow-xl overflow-hidden">
         <!-- Cover Section -->
-        <div class="h-24 bg-gradient-to-r from-blue-600 to-indigo-700 relative">
+        <div class="h-20 bg-gradient-to-r from-blue-600 to-indigo-700 relative">
           <div class="absolute -bottom-16 left-1/2 transform -translate-x-1/2">
             <div class="relative">
               {% if user.profile.image %}
@@ -13,23 +13,22 @@
               {% else %}
                 <img class="w-32 h-32 rounded-full border-4 border-white shadow-lg object-cover bg-gray-200" src="/media/system_image/sample_user_icon.png" alt="Profile Image" />
               {% endif %}
-              <div class="absolute bottom-2 right-2 w-6 h-6 bg-green-500 rounded-full border-2 border-white"></div>
             </div>
           </div>
         </div>
 
         <!-- Profile Content -->
-        <div class="pt-16 pb-8 px-8">
+        <div class="pt-16 pb-6 px-8">
           <!-- Name and Role -->
-          <div class="text-center mb-4">
+          <div class="text-center mb-2">
             <h1 class="text-3xl font-bold text-gray-900 mb-1">{{ user.first_name }} {{ user.last_name }}</h1>
             <p class="text-lg text-gray-600 mb-1">@{{ user.username }}</p>
             <span class="inline-flex items-center px-4 py-2 rounded-full text-sm font-medium bg-blue-100 text-blue-800">{{ user.profile.role }}</span>
           </div>
 
           <!-- Profile Details -->
-          <div class="space-y-1 mb-4">
-            <div class="flex items-center justify-between py-4 border-b border-gray-100">
+          <div class="space-y-1 mb-2">
+            <div class="flex items-center justify-between py-2 border-b border-gray-100">
               <div class="flex items-center">
                 <div class="w-10 h-10 bg-blue-100 rounded-xl flex items-center justify-center mr-4">
                   <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -41,7 +40,7 @@
               <span class="text-gray-900 font-semibold">{{ user.email }}</span>
             </div>
 
-            <div class="flex items-center justify-between py-4 border-b border-gray-100">
+            <div class="flex items-center justify-between py-2 border-b border-gray-100">
               <div class="flex items-center">
                 <div class="w-10 h-10 bg-purple-100 rounded-xl flex items-center justify-center mr-4">
                   <svg class="w-5 h-5 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -52,6 +51,31 @@
               </div>
               <span class="text-gray-900 font-semibold">{{ user.profile.gender }}</span>
             </div>
+
+            <div class="flex items-center justify-between py-2 border-b border-gray-100">
+              <div class="flex items-center">
+                <div class="w-10 h-10 bg-green-100 rounded-xl flex items-center justify-center mr-4">
+                  <svg class="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3a2 2 0 012-2h4a2 2 0 012 2v4M8 7h8M8 7V5a2 2 0 012-2h4a2 2 0 012 2v2M4 7h16M5 21h14a2 2 0 002-2v-9a2 2 0 00-2-2H5a2 2 0 00-2 2v9a2 2 0 002 2z"></path>
+                  </svg>
+                </div>
+                <span class="text-gray-600 font-medium">Date of Birth</span>
+              </div>
+              <span class="text-gray-900 font-semibold">{{ user.profile.dob }}</span>
+            </div>
+
+            <div class="flex items-center justify-between py-2 border-b border-gray-100">
+              <div class="flex items-center">
+                <div class="w-10 h-10 bg-orange-100 rounded-xl flex items-center justify-center mr-4">
+                  <svg class="w-5 h-5 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                  </svg>
+                </div>
+                <span class="text-gray-600 font-medium">Address</span>
+              </div>
+              <span class="text-gray-900 font-semibold">{{ user.profile.address }}</span>
+            </div>
           </div>
 
           <!-- Action Buttons -->
@@ -61,7 +85,7 @@
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
               </svg>Edit Profile
             </a>
-            <a href="/logout" class="inline-flex items-center px-8 py-3 bg-gray-600 hover:bg-gray-700 text-white font-semibold rounded-xl transition-all duration-200 shadow-md hover:shadow-lg transform hover:-translate-y-0.5">
+            <a href="/logout" class="inline-flex items-center px-8 py-3 bg-red-600 hover:bg-red-800 text-white font-semibold rounded-xl transition-all duration-200 shadow-md hover:shadow-lg transform hover:-translate-y-0.5">
               <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path>
               </svg>Logout

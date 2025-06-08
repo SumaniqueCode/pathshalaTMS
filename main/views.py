@@ -25,7 +25,7 @@ def registerUser(request):
         phone = request.POST.get('phone')
         address = request.POST.get('address')
         gender = request.POST.get('gender')
-        image = request.POST.get('image')
+        image = request.FILES.get('image')
         
         if User.objects.filter(username=username).exists():
             return render (request, 'pages/auth/register.html',{ "errors":{'username': 'Username already exists.'}})
@@ -52,15 +52,21 @@ def loginUser(request):
             if authenticated_user:
                 login(request, authenticated_user)
                 messages.success(request, "User Logged in successfully")
-                if authenticated_user.profile.role == 'employee':
-                    return redirect('/employee/dashboard')
-                if authenticated_user.profile.role == 'employer':
-                    return redirect('/employer/dashboard')
-                return redirect('/')
+                return redirect('/dashboard')
             else:
                 return render(request, 'pages/auth/login.html',{"errors":{"password":"Invalid password"}})
         else:
             return render(request, 'pages/auth/login.html',{"errors":{"username":"Invalid Username"}})
+
+def dashboard(request):
+    role = request.user.profile.role
+    if role == 'employee':
+        return redirect('/employee/dashboard')
+    elif role == 'employer':
+        return redirect('/employer/dashboard')
+    else:
+        return redirect('/login')
+    
 
 def employerDashboard(request):
     return render(request, 'pages/employer/dashboard.html')

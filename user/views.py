@@ -24,7 +24,7 @@ def editProfile(request):
         last_name = request.POST.get("last_name")
         password = request.POST.get("password")
         confirm_password = request.POST.get("confirm_password")
-        image = request.POST.get("image")
+        image = request.FILES.get("image")
         phone = request.POST.get("phone")
         dob = request.POST.get("dob")
         address = request.POST.get("address")
@@ -39,7 +39,7 @@ def editProfile(request):
         if len(address) < 3:
             errors = {"address": "Address must be at least 3 characters long"}
         if errors:
-            return render(request, "pages/edit_profile.html", {"errors": errors})
+            return render(request, "pages/auth/edit_profile.html", {"errors": errors})
 
         user.first_name = first_name
         user.last_name = last_name

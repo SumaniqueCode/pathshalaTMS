@@ -37,6 +37,7 @@ urlpatterns = [
     path("profile", profilePage),
     path("edit-profile", editProfilePage),
     path("update-profile", editProfile),
+    path("dashboard", dashboard),
     path("employer/", include(employer_urlpatterns)),
     path("employee/", include(employee_urlpatterns)),
 ]

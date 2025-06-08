@@ -50,7 +50,7 @@
             <!-- DOB Field -->
             <div class="space-y-2">
               <label for="dob" class="block text-sm font-semibold text-gray-700">Date of Birth</label>
-              <input type="date" value="{{user.profile.dob}}" id="dob" name="dob" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200 bg-gray-50 focus:bg-white" />
+              <input type="date" value="{{user.profile.dob|date:'Y-m-d'}}" id="dob" name="dob" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200 bg-gray-50 focus:bg-white" />
               {% if errors %}
                 <span class="text-red-500">{{ errors.dob }}</span>
               {% endif %}

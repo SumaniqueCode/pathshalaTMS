@@ -1,4 +1,46 @@
-{%extends 'layouts/main.html'%}
-{%block content%}
-<h1 class="text-center text-2xl text-blue-500">Create project</h1>
-{%endblock%}
+{% extends 'layouts/main.html' %}
+
+{% block content %}
+  <div class="flex items-center justify-center p-2 my-4">
+    <div class="w-full max-w-2xl">
+      <form method="POST" action="/employer/create-project" enctype="multipart/form-data" class="bg-white shadow-2xl rounded-2xl border border-gray-100 overflow-hidden">
+        {% csrf_token %}
+        <!-- Header Section -->
+        <div class="bg-gradient-to-r from-blue-600 to-blue-700 px-8 py-4 text-center">
+          <h2 class="text-2xl font-bold text-white">Create Project</h2>
+        </div>
+
+        <!-- Form Section -->
+        <div class="px-8 py-4 space-y-4">
+          <!-- Title Field -->
+          <div class="space-y-2">
+            <label for="title" class="block text-sm font-semibold text-gray-700">Project Title</label>
+            <input type="text" id="title" name="title" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200 bg-gray-50 focus:bg-white" placeholder="Enter Title" required />
+            {% if errors %}
+              <span class="text-red-500">{{ errors.title }}</span>
+            {% endif %}
+          </div>
+          <div class="space-y-2">
+            <label for="description" class="block text-sm font-semibold text-gray-700">Description</label>
+            <textarea type="text" rows="4" id="description" name="description" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200 bg-gray-50 focus:bg-white" placeholder="Enter description" required></textarea>
+            {% if errors %}
+              <span class="text-red-500">{{ errors.description }}</span>
+            {% endif %}
+          </div>
+          <!-- Status Field -->
+          <div class="space-y-2">
+            <label for="status" class="block text-sm font-semibold text-gray-700">Status</label>
+            <select id="status" name="status" class="font-semibold w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200 bg-gray-50 focus:bg-white" required>
+              <option class="text-white bg-yellow-500" value="Pending">Pending</option>
+              <option class="text-white bg-blue-600" value="In Progress">In Progress</option>
+              <option class="text-white bg-green-500" value="Completed">Completed</option>
+              <option class="text-white bg-red-500" value="Canceled">Canceled</option>
+            </select>
+          </div>
+          <!-- Submit Button -->
+          <button type="submit" class="w-full bg-gradient-to-r from-blue-600 to-blue-700 text-white py-2 px-4 rounded-lg font-semibold hover:from-blue-700 hover:to-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">Create</button>
+        </div>
+      </form>
+    </div>
+  </div>
+{% endblock %}

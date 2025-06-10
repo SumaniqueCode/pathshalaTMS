@@ -26,7 +26,8 @@ from projects.views import *
 employer_urlpatterns = [
     path("dashboard", employerDashboard),
     path("projects", employerProjects),
-    path("register-project", registerProjectPage)
+    path("register-project", registerProjectPage),
+    path("create-project", createProject),
 ]
 
 employee_urlpatterns = [
@@ -49,7 +50,6 @@ urlpatterns = [
     path("employer/", include(employer_urlpatterns)),
     path("employee/", include(employee_urlpatterns)),
     path("projects", projects),
-    
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -2,7 +2,6 @@ from django.shortcuts import redirect, render
 from django.contrib.auth import logout, authenticate, login
 from django.contrib import messages
 
-
 def profilePage(request):
     return render(request, "pages/profile.html")
 

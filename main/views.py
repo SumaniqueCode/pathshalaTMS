@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth import authenticate, login
 from user.models import Profile
+from django.contrib.auth.decorators import login_required
 
 def index(request):
     return render(request, 'pages/index.html')
@@ -58,6 +59,7 @@ def loginUser(request):
         else:
             return render(request, 'pages/auth/login.html',{"errors":{"username":"Invalid Username"}})
 
+@login_required(login_url='/login')
 def dashboard(request):
     role = request.user.profile.role
     if role == 'employee':
@@ -67,9 +69,18 @@ def dashboard(request):
     else:
         return redirect('/login')
     
-
+@login_required(login_url='/login')    
 def employerDashboard(request):
-    return render(request, 'pages/employer/dashboard.html')
+    role = request.user.profile.role
+    if role == "employer":
+        return render(request, 'pages/employer/dashboard.html')
+    else:
+        return redirect('/employee/dashboard')
 
+@login_required(login_url='/login')
 def employeeDashboard(request):
-    return render(request, 'pages/employee/dashboard.html')
+    role = request.user.profile.role
+    if role == "employee":
+        return render(request, 'pages/employee/dashboard.html')
+    else:
+        return redirect('/employer/dashboard')

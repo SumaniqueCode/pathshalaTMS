@@ -21,10 +21,18 @@ from django.conf.urls.static import static
 from main import settings
 from .views import *
 from user.views import *
+from projects.views import *
 
-employer_urlpatterns = [path("dashboard", employerDashboard)]
+employer_urlpatterns = [
+    path("dashboard", employerDashboard),
+    path("projects", employerProjects),
+    path("register-project", registerProjectPage)
+]
 
-employee_urlpatterns = [path("dashboard", employeeDashboard)]
+employee_urlpatterns = [
+    path("dashboard", employeeDashboard),
+    path("projects", employeeProjects),
+]
 
 urlpatterns = [
     path("admin/", admin.site.urls),
@@ -40,6 +48,8 @@ urlpatterns = [
     path("dashboard", dashboard),
     path("employer/", include(employer_urlpatterns)),
     path("employee/", include(employee_urlpatterns)),
+    path("projects", projects),
+    
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

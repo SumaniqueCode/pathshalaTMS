@@ -17,7 +17,7 @@ def projects(request):
 @login_required(login_url="/login")
 def employerProjects(request):
     role = request.user.profile.role
-    projects = get_list_or_404(Project, user=request.user)
+    projects = Project.objects.filter( user=request.user)
     if role =="employer":
         return render(request, "pages/employer/project/project_page.html", {"projects":projects})
     else:
@@ -55,3 +55,13 @@ def createProject(request):
         
         messages.success(request, "Project created successfully")
         return redirect('/employer/projects')
+
+@login_required(login_url="/login")
+def employerProjectDetails(request, id):
+    project = Project.objects.get(id=id)
+    return render(request, "pages/employer/project/project_details.html", {"project":project})
+
+@login_required(login_url='/login')
+def employeeProjectDetails(request, id):
+    project = Project.objects.get(id=id)
+    return render(request, "pages/employee/project/project_details.html", {"project":project})

@@ -24,32 +24,34 @@ from user.views import *
 from projects.views import *
 
 employer_urlpatterns = [
-    path("dashboard", employerDashboard),
-    path("projects", employerProjects),
-    path("register-project", registerProjectPage),
-    path("create-project", createProject),
+    path("dashboard/", employerDashboard),
+    path("projects/", employerProjects),
+    path("register-project/", registerProjectPage),
+    path("create-project/", createProject),
+    path("project-details/<int:id>/", employerProjectDetails),
 ]
 
 employee_urlpatterns = [
-    path("dashboard", employeeDashboard),
-    path("projects", employeeProjects),
+    path("dashboard/", employeeDashboard),
+    path("projects/", employeeProjects),
+    path("project-details/<int:id>/", employeeProjectDetails),
 ]
 
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("", index),
-    path("login", loginPage),
-    path("register", registerPage),
-    path("register-user", registerUser),
-    path("login-user", loginUser),
+    path("login/", loginPage),
+    path("register/", registerPage),
+    path("register-user/", registerUser),
+    path("login-user/", loginUser),
     path("logout", logoutUser),
-    path("profile", profilePage),
-    path("edit-profile", editProfilePage),
-    path("update-profile", editProfile),
-    path("dashboard", dashboard),
+    path("profile/", profilePage),
+    path("edit-profile/", editProfilePage),
+    path("update-profile/", editProfile),
+    path("dashboard/", dashboard),
     path("employer/", include(employer_urlpatterns)),
     path("employee/", include(employee_urlpatterns)),
-    path("projects", projects),
+    path("projects/", projects),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -27,8 +27,10 @@ employer_urlpatterns = [
     path("dashboard/", employerDashboard),
     path("projects/", employerProjects),
     path("register-project/", registerProjectPage),
-    path("create-project/", createProject),
+    path("create-project", createProject),
     path("project-details/<int:id>/", employerProjectDetails),
+    path('edit-project/<int:id>/', editProjectDetailsPage),
+    path('update-project/<int:id>', editProjectDetails),
 ]
 
 employee_urlpatterns = [
@@ -42,12 +44,12 @@ urlpatterns = [
     path("", index),
     path("login/", loginPage),
     path("register/", registerPage),
-    path("register-user/", registerUser),
+    path("register-user", registerUser),
     path("login-user/", loginUser),
     path("logout", logoutUser),
     path("profile/", profilePage),
     path("edit-profile/", editProfilePage),
-    path("update-profile/", editProfile),
+    path("update-profile", editProfile),
     path("dashboard/", dashboard),
     path("employer/", include(employer_urlpatterns)),
     path("employee/", include(employee_urlpatterns)),

@@ -1,4 +1,4 @@
-from django.shortcuts import redirect, render
+from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib.auth.decorators import login_required
 from .models import *
 from django.contrib import messages
@@ -65,3 +65,35 @@ def employerProjectDetails(request, id):
 def employeeProjectDetails(request, id):
     project = Project.objects.get(id=id)
     return render(request, "pages/employee/project/project_details.html", {"project":project})
+
+@login_required(login_url='/login')
+def editProjectDetailsPage(request, id):
+    project = get_object_or_404(Project, pk=id)
+    if request.user.profile.role=="employer":
+        return render(request, "pages/employer/project/edit_project.html", {"project":project})
+    else:
+        return redirect('/employee/projects')
+
+@login_required(login_url='/login')
+def editProjectDetails(request, id):
+    errors={}
+    project = get_object_or_404(Project, pk=id)
+    if request.method == 'POST':
+        title = request.POST.get('title')
+        description = request.POST.get('description')
+        status = request.POST.get('status')
+        
+        if request.user.profile.role=="employer":
+            if len(title)<3:
+                errors={"title":"Title length should be more than 3 characters."}
+            if description != "" and len(description)<10:
+                errors={"description":"Description length should be more than 10 characters."}
+            if errors:
+                return render(request, "pages/employer/project/register_project.html", {"errors":errors})
+
+            project.title = title
+            project.description = description
+            project.status = status
+            project.save()
+            messages.success(request, "Project updated successfully")
+            return redirect(f'/employer/project-details/{id}')

@@ -10,23 +10,27 @@
   {%if projects%}
   <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mx-6">
     {% for project in projects %}
-      <div class="relative bg-gray-100 hover:bg-gray-200 hover:scale-[102%] transition:ease-in-out duration-300 border-b-4 border-r-4 border-gray-700 rounded-lg py-4 px-6 my-2">
-        <div>
-          <a class="text-2xl font-bold text-blue-700" href="/employer/project-details/{{project.id}}">{{ project.title }}</a>
+      <a  href="/employer/project-details/{{project.id}}">
+        <div class="relative bg-gray-100 hover:bg-gray-200 hover:scale-[102%] transition:ease-in-out duration-300 border-b-4 border-r-4 border-gray-700 rounded-lg py-4 px-6 my-2">
+          <div>
+            <div class="text-2xl font-bold text-blue-700"> {{ project.title }} </div>
+            
+          </div>
+          <span class="
+          {% if project.status == 'Active' %}bg-blue-500
+            {% elif project.status == 'Completed' %}bg-green-500
+            {% elif project.status == 'Pending' %}bg-yellow-500
+            {% elif project.status == 'In Progress' %}bg-blue-500
+            {% else %}bg-purple-500
+            {% endif %}
+          absolute top-0 right-5 z-5 px-4 py-2 rounded-lg text-white font-bold my-4">
+            {{ project.status }}
+          </span>
+          <div class="text-lg font-semibold">  <span class="text-blue-500">Created by: </span>{{ project.user }}</div>
+          <div>{{ project.created_at }}</div>
         </div>
-        <span class="
-        {% if project.status == 'Active' %}bg-blue-500
-          {% elif project.status == 'Completed' %}bg-green-500
-          {% elif project.status == 'Pending' %}bg-yellow-500
-          {% elif project.status == 'In Progress' %}bg-blue-500
-          {% else %}bg-purple-500
-          {% endif %}
-         absolute top-0 right-5 z-5 px-4 py-2 rounded-lg text-white font-bold my-4">
-          {{ project.status }}
-        </span>
-        <div class="text-lg font-semibold">  <span class="text-blue-500">Created by:</span>{{ project.user }}</div>
-        <div>{{ project.created_at }}</div>
-      </div>
+      </a>
+
     {% endfor %}
   </div>
   {%else%}

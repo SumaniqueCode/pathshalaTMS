@@ -44,9 +44,9 @@ def createProject(request):
     
     if user.profile.role=="employer":
         if len(title)<3:
-            errors={"title":"Title length should be more than 3 characters."}
+            errors["title"]= "Title length should be more than 3 characters."
         if description != "" and len(description)<10:
-            errors={"description":"Description length should be more than 10 characters."}
+            errors["description"]= "Description length should be more than 10 characters."
         if errors:
             return render(request, "pages/employer/project/register_project.html", {"errors":errors})
         
@@ -85,9 +85,9 @@ def editProjectDetails(request, id):
         
         if request.user.profile.role=="employer":
             if len(title)<3:
-                errors={"title":"Title length should be more than 3 characters."}
+                errors["title"]= "Title length should be more than 3 characters."
             if description != "" and len(description)<10:
-                errors={"description":"Description length should be more than 10 characters."}
+                errors["description"]= "Description length should be more than 10 characters."
             if errors:
                 return render(request, "pages/employer/project/register_project.html", {"errors":errors})
 
@@ -97,3 +97,11 @@ def editProjectDetails(request, id):
             project.save()
             messages.success(request, "Project updated successfully")
             return redirect(f'/employer/project-details/{id}')
+
+@login_required(login_url='/login')
+def deleteProject(request, id):
+    if request.user.profile.role=="employer":
+        project = get_object_or_404(Project, pk=id)
+        project.delete()
+        messages.success(request, "Project deleted successfully")
+        return redirect('/employer/projects')

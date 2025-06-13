@@ -30,13 +30,13 @@ def editProfile(request):
         gender = request.POST.get("gender")
 
         if password != confirm_password:
-            errors = {"Password": "Passwords do not match"}
+            errors ["Password"] = "Passwords do not match"
         if len(first_name) < 3:
-            errors = {"first_name": "First name must be at least 3 characters long"}
+            errors ["first_name"] = "First name must be at least 3 characters long"
         if len(phone) != 10:
-            errors = {"phone": "Phone number must be 10 digits long"}
+            errors ["phone"] = "Phone number must be 10 digits long"
         if len(address) < 3:
-            errors = {"address": "Address must be at least 3 characters long"}
+            errors ["address"]= "Address must be at least 3 characters long"
         if errors:
             return render(request, "pages/auth/edit_profile.html", {"errors": errors})
 

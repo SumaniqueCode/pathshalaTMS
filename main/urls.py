@@ -31,6 +31,7 @@ employer_urlpatterns = [
     path("project-details/<int:id>/", employerProjectDetails),
     path('edit-project/<int:id>/', editProjectDetailsPage),
     path('update-project/<int:id>', editProjectDetails),
+    path('delete-project/<int:id>', deleteProject),
 ]
 
 employee_urlpatterns = [
@@ -45,7 +46,7 @@ urlpatterns = [
     path("login/", loginPage),
     path("register/", registerPage),
     path("register-user", registerUser),
-    path("login-user/", loginUser),
+    path("login-user", loginUser),
     path("logout", logoutUser),
     path("profile/", profilePage),
     path("edit-profile/", editProfilePage),

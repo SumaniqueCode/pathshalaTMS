@@ -22,6 +22,7 @@ from main import settings
 from .views import *
 from user.views import *
 from projects.views import *
+from tasks.views import *
 
 employer_urlpatterns = [
     path("dashboard/", employerDashboard),
@@ -32,6 +33,8 @@ employer_urlpatterns = [
     path('edit-project/<int:id>/', editProjectDetailsPage),
     path('update-project/<int:id>', editProjectDetails),
     path('delete-project/<int:id>', deleteProject),
+    path('project/<int:id>/register-task/', registerTaskPage),
+    path('create-task', createTask),
 ]
 
 employee_urlpatterns = [

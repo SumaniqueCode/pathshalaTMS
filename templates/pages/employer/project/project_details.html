@@ -1,9 +1,27 @@
 {% extends 'layouts/main.html' %}
 {% block content %}
 <div
-  class="mx-4 flex space-x-6 space-y-3 relative bg-gray-100 border-b-4 border-r-4 border-gray-700 rounded-lg py-4 px-6 my-2">
+  class="        {% if project.status == 'Canceled' %} border-l-4 border-l-red-500
+        {% elif project.status == 'Completed' %} border-l-4 border-l-green-500
+        {% elif project.status == 'Pending' %} border-l-4 border-l-yellow-500
+        {% elif project.status == 'In Progress' %} border-l-4 border-l-blue-500
+        {% else %} bg-purple-500
+        {% endif %}
+  mx-4 flex space-x-6 space-y-3 relative bg-gray-100 border-b-4 border-r-4 border-gray-700 rounded-lg py-4 px-6 my-2">
   <div>
+    <div class="flex gap-4">
     <div class="text-xl font-bold text-blue-500 my-2">{{ project.title }}</div>
+        <span class="
+        {% if project.status == 'Canceled' %} bg-red-500
+        {% elif project.status == 'Completed' %} bg-green-500
+        {% elif project.status == 'Pending' %} bg-yellow-500
+        {% elif project.status == 'In Progress' %} bg-blue-500
+        {% else %} bg-purple-500
+        {% endif %}
+          h-8 px-2 my-auto rounded-lg text-white font-bold">
+      {{ project.status }}
+    </span>
+    </div>
     <div class="font-semibold text-lg">
       <span class="text-blue-500">Created by:</span> {{ project.user }}
     </div>
@@ -15,16 +33,6 @@
         <span class="text-blue-500">Updated at:</span> {{ project.updated_at }}
       </div>
     </div>
-    <span class="
-        {% if project.status == 'Active' %} bg-blue-500
-        {% elif project.status == 'Completed' %} bg-green-500
-        {% elif project.status == 'Pending' %} bg-yellow-500
-        {% elif project.status == 'In Progress' %} bg-blue-500
-        {% else %} bg-purple-500
-        {% endif %}
-         absolute top-0 right-5 z-5 px-4 py-2 rounded-lg text-white font-bold my-4">
-      {{ project.status }}
-    </span>
     <div class="flex gap-2 absolute right-5 bottom-4">
       <a class="px-8 py-2 mx-auto rounded-lg bg-green-500 text-white font-bold"
         href="/employer/edit-project/{{ project.id }}">Edit</a>
@@ -55,7 +63,7 @@
           <div class="text-2xl font-bold text-blue-700">{{ task.title }}</div>
         </div>
         <span class="
-                {% if task.status == 'Active' %} bg-blue-500
+                {% if task.status == 'Canceled' %} bg-red-500
                 {% elif task.status == 'Completed' %} bg-green-500
                 {% elif task.status == 'Pending' %} bg-yellow-500
                 {% elif task.status == 'In Progress' %} bg-blue-500

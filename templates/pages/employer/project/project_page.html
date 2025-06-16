@@ -17,7 +17,7 @@
             
           </div>
           <span class="
-          {% if project.status == 'Active' %}bg-blue-500
+        {% if project.status == 'Canceled' %} bg-red-500
             {% elif project.status == 'Completed' %}bg-green-500
             {% elif project.status == 'Pending' %}bg-yellow-500
             {% elif project.status == 'In Progress' %}bg-blue-500

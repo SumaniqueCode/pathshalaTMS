@@ -28,6 +28,7 @@ def createTask(request):
         project_id = request.POST.get("project_id")
         assigned_user = request.POST.get("assigned_user")
 
+        employee = None
         if len(title) < 3:
             errors["title"] = "Title must be at least 3 characters long."
         if description != "" and len(description) < 5:

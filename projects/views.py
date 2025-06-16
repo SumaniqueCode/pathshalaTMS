@@ -3,6 +3,7 @@ from django.contrib.auth.decorators import login_required
 from .models import *
 from django.contrib import messages
 from django.shortcuts import get_list_or_404
+from tasks.models import Task
 
 @login_required(login_url="/login")
 def projects(request):
@@ -59,7 +60,8 @@ def createProject(request):
 @login_required(login_url="/login")
 def employerProjectDetails(request, id):
     project = Project.objects.get(id=id)
-    return render(request, "pages/employer/project/project_details.html", {"project":project})
+    tasks = Task.objects.filter(project=project)
+    return render(request, "pages/employer/project/project_details.html", {"project":project, "tasks":tasks})
 
 @login_required(login_url='/login')
 def employeeProjectDetails(request, id):

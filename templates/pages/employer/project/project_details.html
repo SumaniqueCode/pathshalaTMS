@@ -1,115 +1,60 @@
 {% extends 'layouts/main.html' %}
 {% block content %}
-  <div class="mx-4 flex space-x-6 space-y-3 relative bg-gray-100 border-b-4 border-r-4 border-gray-700 rounded-lg py-4 px-6 my-2">
-    <div>
-      <div class="text-xl font-bold text-blue-500 my-2">{{ project.title }}</div>
-      <div class="font-semibold text-lg">
-        <span class="text-blue-500">Created by:</span> {{ project.user }}
+<div
+  class="mx-4 flex space-x-6 space-y-3 relative bg-gray-100 border-b-4 border-r-4 border-gray-700 rounded-lg py-4 px-6 my-2">
+  <div>
+    <div class="text-xl font-bold text-blue-500 my-2">{{ project.title }}</div>
+    <div class="font-semibold text-lg">
+      <span class="text-blue-500">Created by:</span> {{ project.user }}
+    </div>
+    <div class="flex gap-4 font-semibold text-lg">
+      <div>
+        <span class="text-blue-500">Created at:</span> {{ project.created_at }}
       </div>
-      <div class="flex gap-4 font-semibold text-lg">
-        <div>
-          <span class="text-blue-500">Created at:</span> {{ project.created_at }}
-        </div>
-        <div>
-          <span class="text-blue-500">Updated at:</span> {{ project.updated_at }}
-        </div>
+      <div>
+        <span class="text-blue-500">Updated at:</span> {{ project.updated_at }}
       </div>
-      <span class="
-        {% if project.status == 'Active' %}
-          
-          
-          
-          
-          
-          bg-blue-500
-
-
-
-
-
-
-        {% elif project.status == 'Completed' %}
-          
-          
-          
-          
-          
-          bg-green-500
-
-
-
-
-
-
-        {% elif project.status == 'Pending' %}
-          
-          
-          
-          
-          
-          bg-yellow-500
-
-
-
-
-
-
-        {% elif project.status == 'In Progress' %}
-          
-          
-          
-          
-          
-          bg-blue-500
-
-
-
-
-
-
-        {% else %}
-          
-          
-          
-          
-          
-          bg-purple-500
-
-
-
-
-
-
+    </div>
+    <span class="
+        {% if project.status == 'Active' %} bg-blue-500
+        {% elif project.status == 'Completed' %} bg-green-500
+        {% elif project.status == 'Pending' %} bg-yellow-500
+        {% elif project.status == 'In Progress' %} bg-blue-500
+        {% else %} bg-purple-500
         {% endif %}
          absolute top-0 right-5 z-5 px-4 py-2 rounded-lg text-white font-bold my-4">
-        {{ project.status }}
-      </span>
-      <div class="flex gap-2 absolute right-5 bottom-4">
-        <a class="px-8 py-2 mx-auto rounded-lg bg-green-500 text-white font-bold" href="/employer/edit-project/{{ project.id }}">Edit</a>
-        <a class="px-8 py-2 mx-auto rounded-lg bg-red-500 text-white font-bold" href="/employer/delete-project/{{ project.id }}">Delete</a>
-      </div>
-    </div>
-    <div class="flex flex-col">
-      <div class="font-semibold text-blue-500 text-xl">Descriptions</div>
-      <div class="ms-2 font-semibold">{{ project.description }}</div>
+      {{ project.status }}
+    </span>
+    <div class="flex gap-2 absolute right-5 bottom-4">
+      <a class="px-8 py-2 mx-auto rounded-lg bg-green-500 text-white font-bold"
+        href="/employer/edit-project/{{ project.id }}">Edit</a>
+      <a class="px-8 py-2 mx-auto rounded-lg bg-red-500 text-white font-bold"
+        href="/employer/delete-project/{{ project.id }}">Delete</a>
     </div>
   </div>
-  <div class="flex flex-col mx-2">
-    <div class="flex p-2 mb-2 justify-between">
-      <h1 class="text-blue-600 text-center text-2xl font-bold">Tasks</h1>
-      <div class="flex ms-auto">
-        <a class="px-4 py-2 rounded-lg bg-green-500 text-white font-bold" href="/employer/project/{{ project.id }}/register-task">Add Task</a>
-      </div>
+  <div class="flex flex-col">
+    <div class="font-semibold text-blue-500 text-xl">Descriptions</div>
+    <div class="ms-2 font-semibold">{{ project.description }}</div>
+  </div>
+</div>
+<div class="flex flex-col mx-2">
+  <div class="flex p-2 mb-2 justify-between">
+    <h1 class="text-blue-600 text-center text-2xl font-bold">Tasks</h1>
+    <div class="flex ms-auto">
+      <a class="px-4 py-2 rounded-lg bg-green-500 text-white font-bold"
+        href="/employer/project/{{ project.id }}/register-task">Add Task</a>
     </div>
-    {% if tasks %}
-      <div class="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mx-4">
-        {% for task in tasks %}
-          <a href="/employer/task/{{task.id}}">
-            <div class="relative bg-gray-100 hover:bg-gray-200 hover:scale-[102%] transition:ease-in-out duration-300 border-b-4 border-r-4 border-gray-700 rounded-lg py-4 px-6 my-2">
-              <div>
-                <div class="text-2xl font-bold text-blue-700">{{ task.title }}</div>
-              </div>
-              <span class="
+  </div>
+  {% if tasks %}
+  <div class="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mx-4">
+    {% for task in tasks %}
+    <a href="/employer/task/{{task.id}}">
+      <div
+        class="relative bg-gray-100 hover:bg-gray-200 hover:scale-[102%] transition:ease-in-out duration-300 border-b-4 border-r-4 border-gray-700 rounded-lg py-4 px-6 my-2">
+        <div>
+          <div class="text-2xl font-bold text-blue-700">{{ task.title }}</div>
+        </div>
+        <span class="
                 {% if task.status == 'Active' %} bg-blue-500
                 {% elif task.status == 'Completed' %} bg-green-500
                 {% elif task.status == 'Pending' %} bg-yellow-500
@@ -117,35 +62,39 @@
                 {% else %} bg-purple-500
                 {% endif %}
                 absolute top-0 right-5 z-5 px-4 py-2 rounded-lg text-white font-bold my-4">
-                {{ task.status }}
-              </span>
-              <div class="text-lg font-semibold">
-                <span class="text-blue-500">Created by: </span>{{ task.user }}
-              </div>
-              <div class="text-lg font-semibold flex gap-2">
-                <span class="text-blue-500">Assigned User: </span>  
-                {%if task.assigned_user%}
-                  {%if task.assigned_user.profile.image%}
-                    <img class="h-9 w-9 border-2 border-black rounded-full" src=" /media/{{task.assigned_user.profile.image}}" alt="assigned user" />
-                  {%else%}
-                    <img class="h-9 w-9 border-2 border-black rounded-full"  src="/media/system_image/sample_user_icon.png" alt="assigned user" />
-                  {%endif%}
-                  {%else%}
-                      <span class="mb-2">User Not assigned</span>
-                {%endif%}
-                </div>
-              <div>{{ task.created_at }}</div>
-            </div>
-          </a>
-        {% endfor %}
-      </div>
-    {% else %}
-      <div class="my-24 w-1/2 mx-auto space-y-12 relative bg-gray-100 hover:bg-gray-200 hover:scale-[101%] transition:ease-in-out duration-300 border-b-4 border-r-4 border-gray-700 rounded-lg py-4 px-6 my-2">
-        <div class="text-2xl font-bold text-blue-500 my-6 text-center">No Tasks has been created</div>
-        <div class="flex">
-          <a class="px-6 py-2 mx-auto rounded-lg bg-green-500 text-white font-bold" href="/employer/project/{{ project.id }}/register-task">Add Task</a>
+          {{ task.status }}
+        </span>
+        <div class="text-lg font-semibold">
+          <span class="text-blue-500">Created by: </span>{{ task.user }}
         </div>
+        <div class="text-lg font-semibold flex gap-2">
+          <span class="text-blue-500">Assigned User: </span>
+          {%if task.assigned_user%}
+          {%if task.assigned_user.profile.image%}
+          <img class="h-9 w-9 border-2 border-black rounded-full" src=" /media/{{task.assigned_user.profile.image}}"
+            alt="assigned user" />
+          {%else%}
+          <img class="h-9 w-9 border-2 border-black rounded-full" src="/media/system_image/sample_user_icon.png"
+            alt="assigned user" />
+          {%endif%}
+          {%else%}
+          <span class="mb-2">User Not assigned</span>
+          {%endif%}
+        </div>
+        <div>{{ task.created_at }}</div>
       </div>
-    {% endif %}
+    </a>
+    {% endfor %}
   </div>
+  {% else %}
+  <div
+    class="my-24 w-1/2 mx-auto space-y-12 relative bg-gray-100 hover:bg-gray-200 hover:scale-[101%] transition:ease-in-out duration-300 border-b-4 border-r-4 border-gray-700 rounded-lg py-4 px-6 my-2">
+    <div class="text-2xl font-bold text-blue-500 my-6 text-center">No Tasks has been created</div>
+    <div class="flex">
+      <a class="px-6 py-2 mx-auto rounded-lg bg-green-500 text-white font-bold"
+        href="/employer/project/{{ project.id }}/register-task">Add Task</a>
+    </div>
+  </div>
+  {% endif %}
+</div>
 {% endblock %}

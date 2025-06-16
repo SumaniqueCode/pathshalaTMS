@@ -35,12 +35,14 @@ employer_urlpatterns = [
     path('delete-project/<int:id>', deleteProject),
     path('project/<int:id>/register-task/', registerTaskPage),
     path('create-task', createTask),
+    path('task/<int:id>/', taskDetails)
 ]
 
 employee_urlpatterns = [
     path("dashboard/", employeeDashboard),
     path("projects/", employeeProjects),
     path("project-details/<int:id>/", employeeProjectDetails),
+    path('task/<int:id>/', taskDetails)
 ]
 
 urlpatterns = [

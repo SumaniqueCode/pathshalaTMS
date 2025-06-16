@@ -60,3 +60,14 @@ def createTask(request):
         task.save()
         messages.success(request, "Task created successfully!")
         return redirect(f"/employer/project-details/{project_id}/")
+
+@login_required(login_url="/login")
+def taskDetails(request, id):
+    role = request.user.profile.role
+    task = Task.objects.get(pk=id)
+    if role == "employer":
+        return render(request, "pages/employer/project/task/task_details.html",{"task":task})
+    elif role == "employee":
+        return render(request, "pages/employer/project/task/task_details.html",{"task":task})
+    else:
+        return redirect("/")

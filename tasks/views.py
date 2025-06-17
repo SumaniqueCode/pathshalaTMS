@@ -93,7 +93,7 @@ def updateTask(request, id):
             errors["title"] = "Title must be at least 3 characters long."
         if description != "" and len(description) < 5:
             errors["description"] = "Description must be at least 5 characters long."
-        if assigned_user == None:
+        if assigned_user:
             employee_check = User.objects.filter(email=assigned_user).exists()
             if employee_check:
                 employee = get_object_or_404(User, email=assigned_user)
@@ -106,15 +106,15 @@ def updateTask(request, id):
             return redirect(request,"pages/employer/project/task/edit_task.html",{"errors": errors,})
 
         task = Task.objects.get(pk=id)
-        task.title = (title,)
-        task.description = (description,)
-        task.status = (status,)
-        task.priority = (priority,)
-        task.assigned_user = (employee,)
-        task.deadline = (deadline,)
+        task.title = title
+        task.description = description
+        task.status = status
+        task.priority = priority
+        task.assigned_user = employee
+        task.deadline = deadline
         task.save()
         messages.success(request, "Task updated successfully!")
-        return redirect(f"/employer/task-details/{id}/")
+        return redirect(f"/employer/task/{id}/")
 
 @login_required(login_url='/login')
 def deleteTask(request,project_id, id):

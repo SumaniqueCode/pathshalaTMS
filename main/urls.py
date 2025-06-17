@@ -30,19 +30,22 @@ employer_urlpatterns = [
     path("register-project/", registerProjectPage),
     path("create-project", createProject),
     path("project-details/<int:id>/", employerProjectDetails),
-    path('edit-project/<int:id>/', editProjectDetailsPage),
-    path('update-project/<int:id>', editProjectDetails),
-    path('delete-project/<int:id>', deleteProject),
-    path('project/<int:id>/register-task/', registerTaskPage),
-    path('create-task', createTask),
-    path('task/<int:id>/', taskDetails)
+    path("edit-project/<int:id>/", editProjectDetailsPage),
+    path("update-project/<int:id>", editProjectDetails),
+    path("delete-project/<int:id>", deleteProject),
+    path("project/<int:id>/register-task/", registerTaskPage),
+    path("create-task", createTask),
+    path("task/<int:id>/", taskDetails),
+    path("edit-task/<int:id>/", editTaskPage),
+    path('update-task/<int:id>', updateTask),
+    path('delete-task/<int:project_id>/<int:id>', deleteTask)
 ]
 
 employee_urlpatterns = [
     path("dashboard/", employeeDashboard),
     path("projects/", employeeProjects),
     path("project-details/<int:id>/", employeeProjectDetails),
-    path('task/<int:id>/', taskDetails)
+    path("task/<int:id>/", taskDetails),
 ]
 
 urlpatterns = [

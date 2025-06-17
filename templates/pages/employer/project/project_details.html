@@ -1,15 +1,9 @@
 {% extends 'layouts/main.html' %}
 {% block content %}
 <div
-  class="        {% if project.status == 'Canceled' %} border-l-4 border-l-red-500
-        {% elif project.status == 'Completed' %} border-l-4 border-l-green-500
-        {% elif project.status == 'Pending' %} border-l-4 border-l-yellow-500
-        {% elif project.status == 'In Progress' %} border-l-4 border-l-blue-500
-        {% else %} bg-purple-500
-        {% endif %}
-  mx-4 flex space-x-6 space-y-3 relative bg-gray-100 border-b-4 border-r-4 border-gray-700 rounded-lg py-4 px-6 my-2">
+  class="mx-4 flex space-x-6 space-y-3 relative bg-gray-100 border-b-4 border-r-4 border-gray-700 rounded-lg py-4 px-6 my-2">
   <div>
-    <div class="flex gap-4">
+    <div class="flex gap-2">
     <div class="text-xl font-bold text-blue-500 my-2">{{ project.title }}</div>
         <span class="
         {% if project.status == 'Canceled' %} bg-red-500

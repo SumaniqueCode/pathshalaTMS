@@ -1,8 +1,37 @@
-{%extends 'layouts/main.html'%}
-{%block content%}
-  <div class="my-24 w-1/2 mx-auto space-y-12 relative bg-gray-100 hover:bg-gray-200 hover:scale-[101%] transition:ease-in-out duration-300 border-b-4 border-r-4 border-gray-700 rounded-lg py-4 px-6 my-2">
-  <div class="text-2xl font-bold text-blue-500 my-6 text-center">
-    Task Details
+{% extends 'layouts/main.html' %}
+{% block content %}
+<div
+  class="my-20 w-1/2 mx-auto space-y-4 relative bg-gray-100 border-b-4 border-r-4 rounded-lg py-4 px-6 my-2
+          {% if task.status == 'Canceled' %} border-red-700
+        {% elif task.status == 'Completed' %} border-green-700
+        {% elif task.status == 'Pending' %} border-yellow-700
+        {% elif task.status == 'In Progress' %} border-blue-700
+        {% else %} border-purple-700
+        {% endif %}
+  ">
+  <div class="text-2xl font-bold text-blue-500 my-4 text-center">{{ task.title }}</div>
+  <div class="text-lg font-semibold text-gray-800">
+    <div>Descriptions: {{ task.description }}</div>
+    <div>Status: <span class="
+        {% if task.status == 'Canceled' %} text-red-500
+        {% elif task.status == 'Completed' %} text-green-500
+        {% elif task.status == 'Pending' %} text-yellow-500
+        {% elif task.status == 'In Progress' %} text-blue-500
+        {% else %} text-purple-500
+        {% endif %}
+         h-8 px-2 my-auto rounded-lg font-bold"> {{ task.status }} </span></div>
+    <div>Priority: {{ task.priority }}</div>
+    <div>Created by: {{ task.user }}</div>
+    <div>Assigned User: {{ task.assigned_user }}</div>
+    <div>Deadline: {{ task.deadline }}</div>
+    <div>Created at: {{ task.created_at }}</div>
+    <div>Updated at: {{ task.updated_at }}</div>
+    <div class="flex gap-4 mt-8 mb-4">
+      <a class="px-8 py-2 rounded-md bg-blue-700 hover:bg-blue-800 text-white"
+        href="/employer/edit-task/{{task.id}}">Edit</a>
+      <a class="px-8 py-2 rounded-md bg-red-700 hover:bg-red-800 text-white"
+        href="/employer/delete-task/{{task.project.id}}/{{task.id}}">Delete</a>
+    </div>
   </div>
-  </div>
-{%endblock%}
+</div>
+{% endblock %}

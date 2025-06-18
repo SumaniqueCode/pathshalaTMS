@@ -26,9 +26,10 @@ def employerProjects(request):
     
 @login_required(login_url="/login")
 def employeeProjects(request):
-    role = request.user.profile.role
-    if role == "employee":
-        return render(request, "pages/employee/project/project_page.html")
+    user = request.user
+    if user.profile.role == "employee":
+        tasks = Task.objects.filter(assigned_user=user)
+        return render(request, "pages/employee/project/project_page.html", {"tasks":tasks})
     else:
         return redirect('/employer/projects')
 
@@ -66,7 +67,8 @@ def employerProjectDetails(request, id):
 @login_required(login_url='/login')
 def employeeProjectDetails(request, id):
     project = Project.objects.get(id=id)
-    return render(request, "pages/employee/project/project_details.html", {"project":project})
+    tasks = Task.objects.filter(assigned_user = request.user, project=project)
+    return render(request, "pages/employee/project/project_details.html", {"project":project, "tasks":tasks})
 
 @login_required(login_url='/login')
 def editProjectDetailsPage(request, id):

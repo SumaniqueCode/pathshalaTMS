@@ -1,4 +1,40 @@
 {% extends 'layouts/main.html' %}
 {% block content %}
-  <h1 class="text-blue-600 text-center text-2xl font-bold my-12">This is Employee Project Page</h1>
+<div class="flex flex-col">
+  <div class="flex p-2 mb-2 justify-between border-b-2 border-blue-700">
+    <h1 class="text-blue-600 text-center text-2xl font-bold">Projects</h1>
+  </div>
+  {%if tasks%}
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mx-6">
+    {% for task in tasks %}
+      <a  href="/employee/project-details/{{task.project.id}}">
+        <div class="relative bg-gray-100 hover:bg-gray-200 hover:scale-[102%] transition:ease-in-out duration-300 border-b-4 border-r-4 border-gray-700 rounded-lg py-4 px-6 my-2">
+          <div>
+            <div class="text-2xl font-bold text-blue-700"> {{ task.project.title }} </div>
+          </div>
+          <span class="
+        {% if task.project.status == 'Canceled' %} bg-red-500
+            {% elif task.project.status == 'Completed' %}bg-green-500
+            {% elif task.project.status == 'Pending' %}bg-yellow-500
+            {% elif task.project.status == 'In Progress' %}bg-blue-500
+            {% else %}bg-purple-500
+            {% endif %}
+          absolute top-0 right-5 z-5 px-4 py-2 rounded-lg text-white font-bold my-4">
+            {{ task.project.status }}
+          </span>
+          <div class="text-lg font-semibold">  <span class="text-blue-500">Created by: </span>{{ task.project.user }}</div>
+          <div>{{ task.project.created_at }}</div>
+        </div>
+      </a>
+
+    {% endfor %}
+  </div>
+  {%else%}
+  <div class="min-h-[40vh] flex w-1/2 mx-auto space-y-12 relative bg-gray-100 hover:bg-gray-200 hover:scale-[101%] transition:ease-in-out duration-300 border-b-4 border-r-4 border-gray-700 rounded-lg py-4 px-6 my-2">
+  <div class="text-2xl font-bold text-blue-500 m-auto text-center">
+    No Projects has been assigned to you.
+  </div>
+  </div>
+  {%endif%}
+  </div>
 {% endblock %}

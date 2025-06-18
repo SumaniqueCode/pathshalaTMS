@@ -65,7 +65,7 @@ def taskDetails(request, id):
     if role == "employer":
         return render(request, "pages/employer/project/task/task_details.html", {"task": task})
     elif role == "employee":
-        return render(request, "pages/employer/project/task/task_details.html", {"task": task})
+        return render(request, "pages/employee/project/task/task_details.html", {"task": task})
     else:
         return redirect("/")
 

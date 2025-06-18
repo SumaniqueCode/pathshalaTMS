@@ -12,7 +12,7 @@
         {% elif project.status == 'In Progress' %} bg-blue-700
         {% else %} bg-purple-500
         {% endif %}
-          h-8 px-2 my-auto rounded-lg text-white font-bold">
+          h-6 px-2 my-auto rounded-lg text-white font-bold">
       {{ project.status }}
     </span>
     </div>
@@ -27,12 +27,6 @@
         <span class="text-blue-500">Updated at:</span> {{ project.updated_at }}
       </div>
     </div>
-    <div class="flex gap-2 absolute right-5 bottom-4">
-      <a class="px-8 py-2 mx-auto rounded-lg bg-blue-700 text-white font-bold"
-        href="/employer/edit-project/{{ project.id }}">Edit</a>
-      <a class="px-8 py-2 mx-auto rounded-lg bg-red-500 text-white font-bold"
-        href="/employer/delete-project/{{ project.id }}">Delete</a>
-    </div>
   </div>
   <div class="flex flex-col">
     <div class="font-semibold text-blue-500 text-xl">Descriptions</div>
@@ -42,15 +36,11 @@
 <div class="flex flex-col mx-2">
   <div class="flex p-2 mb-2 justify-between">
     <h1 class="text-blue-600 text-center text-2xl font-bold">Tasks</h1>
-    <div class="flex ms-auto">
-      <a class="px-4 py-2 rounded-lg bg-blue-700 text-white font-bold"
-        href="/employer/project/{{ project.id }}/register-task">Add Task</a>
-    </div>
   </div>
   {% if tasks %}
   <div class="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mx-4">
     {% for task in tasks %}
-    <a href="/employer/task/{{task.id}}">
+    <a href="/employee/task/{{task.id}}">
       <div
         class="relative bg-gray-100 hover:bg-gray-200 hover:scale-[102%] transition:ease-in-out duration-300 border-b-4 border-r-4 border-gray-700 rounded-lg py-4 px-6 my-2">
         <div>
@@ -89,13 +79,8 @@
     {% endfor %}
   </div>
   {% else %}
-  <div
-    class="my-24 w-1/2 mx-auto space-y-12 relative bg-gray-100 hover:bg-gray-200 hover:scale-[101%] transition:ease-in-out duration-300 border-b-4 border-r-4 border-gray-700 rounded-lg py-4 px-6 my-2">
-    <div class="text-2xl font-bold text-blue-500 my-6 text-center">No Tasks has been created</div>
-    <div class="flex">
-      <a class="px-6 py-2 mx-auto rounded-lg bg-green-500 text-white font-bold"
-        href="/employer/project/{{ project.id }}/register-task">Add Task</a>
-    </div>
+  <div class="min-h-[40vh] flex mb-6 w-1/2 mx-auto space-y-12 relative bg-gray-100 hover:bg-gray-200 hover:scale-[101%] transition:ease-in-out duration-300 border-b-4 border-r-4 border-gray-700 rounded-lg py-4 px-6 my-2">
+    <div class="m-auto text-2xl font-bold text-blue-500 text-center">No Tasks has been assigned to you</div>
   </div>
   {% endif %}
 </div>

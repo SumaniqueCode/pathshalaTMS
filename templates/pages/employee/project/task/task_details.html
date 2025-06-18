@@ -21,21 +21,21 @@
         {% endif %}
          h-8 px-2 my-auto rounded-lg font-bold"> {{ task.status }} </span></div>
     <div>Priority: <span class="font-bold
-        {% if task.priority == 'High' %} text-red-500
+              {% if task.priority == 'High' %} text-red-500
         {% elif task.priority == 'Medium' %} text-yellow-500
         {% elif task.priority == 'Low' %} text-blue-500
         {% else %} text-purple-500
         {% endif %}
-      "> {{ task.priority }}</span></div>    <div>Created by: {{ task.user }}</div>
+      
+      "> {{ task.priority }}</span></div>
+    <div>Created by: {{ task.user }}</div>
     <div>Assigned User: {{ task.assigned_user }}</div>
     <div>Deadline: {{ task.deadline }}</div>
     <div>Created at: {{ task.created_at }}</div>
     <div>Updated at: {{ task.updated_at }}</div>
-    <div class="flex gap-4 mt-8 mb-4">
-      <a class="px-8 py-2 rounded-md bg-blue-700 hover:bg-blue-800 text-white"
-        href="/employer/edit-task/{{task.id}}">Edit</a>
-      <a class="px-8 py-2 rounded-md bg-red-700 hover:bg-red-800 text-white"
-        href="/employer/delete-task/{{task.project.id}}/{{task.id}}">Delete</a>
+    <div class="flex mt-8 mb-4">
+      <a class="py-2 px-6 mx-auto rounded-xl bg-blue-700 hover:bg-blue-800 text-white"
+        href="/employer/edit-task/{{task.id}}">SUBMIT TASK</a>
     </div>
   </div>
 </div>

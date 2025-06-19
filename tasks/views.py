@@ -126,3 +126,15 @@ def deleteTask(request,project_id, id):
         return redirect(f"/employer/project-details/{project_id}")
     else:
         messages.error(request, "You do not have permission to delete this task.")
+        
+@login_required(login_url="/login")
+def submitTask(request, id):
+    if request.method == "POST":
+        attachment = request.FILES.get('attachment')
+        task = Task.objects.get(pk=id)
+        if attachment:
+            task.attachment = attachment
+        task.status = "Completed"
+        task.save()
+        messages.success(request, "Task submitted successfully!")
+        return redirect(f'/employee/task/{id}')

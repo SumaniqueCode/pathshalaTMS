@@ -46,6 +46,7 @@ employee_urlpatterns = [
     path("projects/", employeeProjects),
     path("project-details/<int:id>/", employeeProjectDetails),
     path("task/<int:id>/", taskDetails),
+    path("submit-task/<int:id>", submitTask),
 ]
 
 urlpatterns = [

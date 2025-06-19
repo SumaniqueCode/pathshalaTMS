@@ -1,42 +1,79 @@
 {% extends 'layouts/main.html' %}
 {% block content %}
-<div
-  class="my-12 w-1/2 mx-auto space-y-4 relative bg-gray-100 border-b-4 border-r-4 rounded-lg py-4 px-6
-          {% if task.status == 'Canceled' %} border-red-700
-        {% elif task.status == 'Completed' %} border-green-700
-        {% elif task.status == 'Pending' %} border-yellow-700
-        {% elif task.status == 'In Progress' %} border-blue-700
-        {% else %} border-purple-700
-        {% endif %}
-  ">
-  <div class="text-2xl font-bold text-blue-500 my-4 text-center">{{ task.title }}</div>
-  <div class="text-lg font-semibold text-gray-800">
-    <div>Descriptions: {{ task.description }}</div>
-    <div>Status: <span class="
-        {% if task.status == 'Canceled' %} text-red-500
-        {% elif task.status == 'Completed' %} text-green-500
-        {% elif task.status == 'Pending' %} text-yellow-500
-        {% elif task.status == 'In Progress' %} text-blue-500
-        {% else %} text-purple-500
-        {% endif %}
-         h-8 px-2 my-auto rounded-lg font-bold"> {{ task.status }} </span></div>
-    <div>Priority: <span class="font-bold
-              {% if task.priority == 'High' %} text-red-500
-        {% elif task.priority == 'Medium' %} text-yellow-500
-        {% elif task.priority == 'Low' %} text-blue-500
-        {% else %} text-purple-500
-        {% endif %}
-      
-      "> {{ task.priority }}</span></div>
-    <div>Created by: {{ task.user }}</div>
-    <div>Assigned User: {{ task.assigned_user }}</div>
-    <div>Deadline: {{ task.deadline }}</div>
-    <div>Created at: {{ task.created_at }}</div>
-    <div>Updated at: {{ task.updated_at }}</div>
-    <div class="flex mt-8 mb-4">
-      <a class="py-2 px-6 mx-auto rounded-xl bg-blue-700 hover:bg-blue-800 text-white"
-        href="/employer/edit-task/{{task.id}}">SUBMIT TASK</a>
+<div class="py-12">
+  <div id="taskDetails"
+    class="w-1/2 mx-auto space-y-4 relative bg-gray-100 border-b-4 border-r-4 rounded-lg py-4 px-6
+            {% if task.status == 'Canceled' %} border-red-700
+          {% elif task.status == 'Completed' %} border-green-700
+          {% elif task.status == 'Pending' %} border-yellow-700
+          {% elif task.status == 'In Progress' %} border-blue-700
+          {% else %} border-purple-700
+          {% endif %}
+    ">
+    <div class="text-2xl font-bold text-blue-500 my-4 text-center">{{ task.title }}</div>
+    <div class="text-lg font-semibold text-gray-800">
+      <div>Descriptions: {{ task.description }}</div>
+      <div>Status: <span class="
+          {% if task.status == 'Canceled' %} text-red-500
+          {% elif task.status == 'Completed' %} text-green-500
+          {% elif task.status == 'Pending' %} text-yellow-500
+          {% elif task.status == 'In Progress' %} text-blue-500
+          {% else %} text-purple-500
+          {% endif %}
+          h-8 px-2 my-auto rounded-lg font-bold"> {{ task.status }} </span></div>
+      <div>Priority: <span class="font-bold
+                {% if task.priority == 'High' %} text-red-500
+          {% elif task.priority == 'Medium' %} text-yellow-500
+          {% elif task.priority == 'Low' %} text-blue-500
+          {% else %} text-purple-500
+          {% endif %}
+        
+        "> {{ task.priority }}</span></div>
+      <div>Created by: {{ task.user }}</div>
+      <div>Assigned User: {{ task.assigned_user }}</div>
+      <div>Deadline: {{ task.deadline }}</div>
+      <div>Created at: {{ task.created_at }}</div>
+      <div>Updated at: {{ task.updated_at }}</div>
+      <div class="flex mt-8 mb-4">
+        {%if task.status != "Completed"%}
+          <button id="submitBtn" onclick="showSubmitTask()" class="py-2 px-6 mx-auto rounded-xl bg-blue-700 hover:bg-blue-800 text-white">SUBMIT TASK</button>
+        {%else%}
+          <div class="font-bold text-xl text-green-700 mx-auto">
+            Task Submitted successfully !
+          </div>
+        {%endif%}
+      </div>
     </div>
   </div>
+
+  <div id="submitTask" class="flex my-4 hidden">
+    <form method="post" class="w-1/3 mx-auto flex flex-col gap-4 border-2 border-gray-700 rounded-lg p-4" action="/employee/submit-task/{{task.id}}" enctype="multipart/form-data">
+      {% csrf_token %}
+      <div class="font-bold text-2xl text-blue-700 mx-auto mb-4">
+        Submit Task
+      </div>
+      <div class="font-semibold text-lg text-gray-900">
+        Attachment <input class="border-2 rounded-lg" type="file" name="attachment" id="attachment">
+      </div>
+      <div class="flex justify-between mx-12 text-white font-semibold mt-6">
+        <button type="submit" class="px-6 py-2 rounded-xl bg-blue-700 hover:bg-blue-800">Submit</button>
+        <button type="button" onclick="showTaskDesc()" class="px-6 py-2 rounded-xl bg-red-700 hover:bg-red-800">Cancel</button>
+      </div>
+    </form>
+  </div>
+    <script>
+    function showSubmitTask() {
+     task_desc=  document.getElementById("taskDetails")
+     submit_task = document.getElementById("submitTask")
+      submit_task.style.display = "block"
+      task_desc.style.display = "none"
+    }
+    function showTaskDesc() {
+     task_desc=  document.getElementById("taskDetails")
+     submit_task = document.getElementById("submitTask")
+      submit_task.style.display = "none"
+      task_desc.style.display = "block"
+    }
+  </script>
 </div>
 {% endblock %}

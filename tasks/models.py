@@ -3,6 +3,9 @@ from django.contrib.auth.models import User
 from projects.models import Project
 
 
+def attachment_path(instance, filename):
+    return f'attachments/{instance.id}/{filename}'
+
 class Task(models.Model):
     class StatusOptions(models.TextChoices):
         PENDING = "Pending", "Pending"
@@ -25,3 +28,4 @@ class Task(models.Model):
     deadline = models.DateField(null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True, editable=False)
     updated_at = models.DateTimeField(auto_now=True, editable=False)
+    attachment = models.FileField(blank=True, null=True, upload_to=attachment_path)

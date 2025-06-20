@@ -34,12 +34,22 @@
       <div>Deadline: {{ task.deadline }}</div>
       <div>Created at: {{ task.created_at }}</div>
       <div>Updated at: {{ task.updated_at }}</div>
-      <div class="flex mt-8 mb-4">
+      <div class="flex flex-col mt-8 mb-4">
         {%if task.status != "Completed"%}
           <button id="submitBtn" onclick="showSubmitTask()" class="py-2 px-6 mx-auto rounded-xl bg-blue-700 hover:bg-blue-800 text-white">SUBMIT TASK</button>
         {%else%}
           <div class="font-bold text-xl text-green-700 mx-auto">
             Task Submitted successfully !
+          </div>
+          <div class="flex gap-6 my-4">
+            <div>View Submitted task: </div>
+            {%if task.attachment%}
+              <a class="bg-blue-700 hover:bg-blue-800 text-white rounded-xl px-6 py-1" href="{{task.attachment.url}}" download >Download</a>
+            {%else%}
+            <div class="text-blue-700">
+              No attachment found
+            </div>
+            {%endif%}
           </div>
         {%endif%}
       </div>

@@ -1,4 +1,59 @@
-{%extends 'layouts/main.html'%}
-{%block content%}
-This is employer dashboard
+{% extends 'layouts/main.html' %}
+{% block content %}
+<div class="grid grid-cols-3 gap-4 my-4 mx-4">
+    <div class="">
+        <div class="text-xl px-4 py-1 font-bold text-white bg-blue-700 bg-yellow-600">Pending Tasks</div>
+        <div class="rounded-lg">
+            {% for task in pendingTasks %}
+            <div
+                class="grid grid-cols-3 gap-2 text-center text-lg font-semibold px-4 text-gray-900 py-1 border-b-2 border-white bg-gray-200 hover:bg-gray-300 hover:scale-[101%] duration-300">
+                <div class="">{{ task.title }}</div>
+                <div>{{task.project.title}} </div>
+                <div class="{% if task.priority == 'High' %} text-red-500
+            {% elif task.priority == 'Medium' %} text-yellow-500
+            {% elif task.priority == 'Low' %} text-blue-500
+            {% else %} text-purple-500
+            {% endif %}"> {{task.priority}}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="">
+        <div class="text-xl px-4 py-1 font-bold text-white bg-blue-700 bg-blue-700">In Progress Tasks</div>
+        <div class="rounded-lg">
+            {% for task in inProgressTasks %}
+            <div
+                class="grid grid-cols-3 gap-2 text-center text-lg font-semibold px-4 text-gray-900 py-1 border-b-2 border-white bg-gray-200 hover:bg-gray-300 hover:scale-[101%] duration-300">
+                <div class="">{{ task.title }}</div>
+                <div>{{task.project.title}}</div>
+                <div class="{% if task.priority == 'High' %} text-red-500
+            {% elif task.priority == 'Medium' %} text-yellow-500
+            {% elif task.priority == 'Low' %} text-blue-500
+            {% else %} text-purple-500
+            {% endif %}"> {{task.priority}}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="">
+        <div class="text-xl px-4 py-1 font-bold text-white bg-blue-700 bg-red-600">Completed Tasks</div>
+        <div class="rounded-lg">
+            {% for task in completedTasks %}
+            <div
+                class="grid grid-cols-3 gap-2 text-center text-lg font-semibold px-4 text-gray-900 py-1 border-b-2 border-white bg-gray-200 hover:bg-gray-300 hover:scale-[101%] duration-300">
+                <div class="">{{ task.title }}</div>
+                <div>{{task.project.title}}</div>
+                <div class="{% if task.priority == 'High' %} text-red-500
+            {% elif task.priority == 'Medium' %} text-yellow-500
+            {% elif task.priority == 'Low' %} text-blue-500
+            {% else %} text-purple-500
+            {% endif %}"> {{task.priority}}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
 {% endblock %}

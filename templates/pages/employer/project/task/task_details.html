@@ -1,7 +1,6 @@
 {% extends 'layouts/main.html' %}
 {% block content %}
-<div
-  class="my-12 w-1/2 mx-auto space-y-4 relative bg-gray-100 border-b-4 border-r-4 rounded-lg py-4 px-6
+<div class="my-12 w-1/2 mx-auto space-y-4 relative bg-gray-100 border-b-4 border-r-4 rounded-lg py-4 px-6
           {% if task.status == 'Canceled' %} border-red-700
         {% elif task.status == 'Completed' %} border-green-700
         {% elif task.status == 'Pending' %} border-yellow-700
@@ -26,16 +25,36 @@
         {% elif task.priority == 'Low' %} text-blue-500
         {% else %} text-purple-500
         {% endif %}
-      "> {{ task.priority }}</span></div>    <div>Created by: {{ task.user }}</div>
+      "> {{ task.priority }}</span></div>
+    <div>Created by: {{ task.user }}</div>
     <div>Assigned User: {{ task.assigned_user }}</div>
     <div>Deadline: {{ task.deadline }}</div>
     <div>Created at: {{ task.created_at }}</div>
     <div>Updated at: {{ task.updated_at }}</div>
-    <div class="flex gap-4 mt-8 mb-4">
+
+    <div class="flex gap-4 mb-4 mt-8">
       <a class="px-8 py-2 rounded-md bg-blue-700 hover:bg-blue-800 text-white"
         href="/employer/edit-task/{{task.id}}">Edit</a>
       <a class="px-8 py-2 rounded-md bg-red-700 hover:bg-red-800 text-white"
         href="/employer/delete-task/{{task.project.id}}/{{task.id}}">Delete</a>
+    </div>
+    <div class="flex flex-col my-4">
+      {%if task.status == "Completed"%}
+      <div class="font-bold text-xl text-green-700">
+        Task has been Submitted by {{task.assigned_user}} !
+      </div>
+      <div class="flex gap-6 my-4">
+        <div>View Submitted task: </div>
+        {%if task.attachment%}
+        <a class="bg-blue-700 hover:bg-blue-800 text-white rounded-xl px-6 py-1" href="{{task.attachment.url}}"
+          download>Download</a>
+        {%else%}
+        <div class="text-blue-700">
+          No attachment found
+        </div>
+        {%endif%}
+      </div>
+      {%endif%}
     </div>
   </div>
 </div>

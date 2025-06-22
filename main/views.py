@@ -5,6 +5,8 @@ from django.contrib.auth import authenticate, login
 from user.models import Profile
 from django.contrib.auth.decorators import login_required
 from tasks.models import Task
+from django.contrib.auth.password_validation import validate_password
+from django.core.validators import validate_email
 
 def index(request):
     return render(request, 'pages/index.html')
@@ -16,6 +18,7 @@ def registerPage(request):
     return render(request, 'pages/auth/register.html')
 
 def registerUser(request):
+    errors = {}
     if request.method == 'POST':
         username = request.POST.get('username')
         email = request.POST.get('email')
@@ -30,13 +33,23 @@ def registerUser(request):
         image = request.FILES.get('image')
         
         if User.objects.filter(username=username).exists():
-            return render (request, 'pages/auth/register.html',{ "errors":{'username': 'Username already exists.'}})
+            errors ["username"]= 'Username already exists.'
         if User.objects.filter(email=email).exists():
-            return render (request, 'pages/auth/register.html', { "errors":{'email': 'Email already exists'}})
-        if password != confirm_password:
-            return render (request, 'pages/auth/register.html', { "errors":{'password':'passwords do not match'}})
+             errors ["email"]= 'Email already exists'
+             
+        try:
+            validate_password(password)
+            if password != confirm_password:
+                errors ["confirm_password"] = 'passwords do not match'
+        except Exception as e:
+            errors ["password"] = e.messages
+            errors ["confirm_password"] = e.messages
+
+            
         if len(phone)!=10:
-            return render (request, 'pages/auth/register.html', { "errors":{'phone':'phone number should be 10 digits'}})
+             errors ["phone"] = 'phone number should be 10 digits'            
+        if errors:
+            return render(request, 'pages/auth/register.html', {'errors': errors})
         user = User.objects.create_user(username=username, email=email, password=password, first_name=first_name, last_name=last_name)
         profile = Profile(user=user, dob=dob, phone=phone, address=address, gender=gender, role="employee", image=image)
         profile.save()

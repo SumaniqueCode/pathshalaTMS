@@ -24,7 +24,7 @@
             </div>
             <div class="space-y-2">
               <label for="last_name" class="block text-sm font-semibold text-gray-700">Last Name</label>
-              <input type="text" id="last_name" name="last_name" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200 bg-gray-50 focus:bg-white" placeholder="Enter last name" required />
+              <input type="text" id="last_name" name="last_name" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200 bg-gray-50 focus:bg-white" placeholder="Enter last name" />
               {% if errors %}
                 <span class="text-red-500">{{ errors.last_name }}</span>
               {% endif %}
@@ -89,7 +89,9 @@
             <label for="password" class="block text-sm font-semibold text-gray-700">Password</label>
             <input type="password" id="password" name="password" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200 bg-gray-50 focus:bg-white" placeholder="Create a strong password" required />
             {% if errors %}
-              <span class="text-red-500">{{ errors.password }}</span>
+            {%for error in errors.password %}
+              <div class="text-red-500">{{ error }}</div>
+            {%endfor%}
             {% endif %}
           </div>
 
@@ -98,14 +100,15 @@
             <label for="image" class="block text-sm font-semibold text-gray-700">Confirm Password</label>
             <input type="password" id="confirm_password" name="confirm_password" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200 bg-gray-50 focus:bg-white" placeholder="Confirm your password" required />
             {% if errors %}
-              <span class="text-red-500">{{ errors.password }}</span>
-            {% endif %}
+            {%for error in errors.confirm_password %}
+              <div class="text-red-500">{{ error }}</div>
+            {%endfor%}            {% endif %}
           </div>
 
           <!-- Image Field -->
           <div class="space-y-2">
             <label for="image" class="block text-sm font-semibold text-gray-700">Profile Image</label>
-            <input type="file" id="image" name="image" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200 bg-gray-50 focus:bg-white" placeholder="Confirm your password" required />
+            <input type="file" id="image" name="image" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200 bg-gray-50 focus:bg-white" required/>
             {% if errors %}
               <span class="text-red-500">{{ errors.image }}</span>
             {% endif %}

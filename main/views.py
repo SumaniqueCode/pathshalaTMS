@@ -85,6 +85,41 @@ def employerDashboard(request):
 def employeeDashboard(request):
     role = request.user.profile.role
     if role == "employee":
-        return render(request, 'pages/employee/dashboard.html')
+        pendingTasks = Task.objects.filter(status = 'Pending', assigned_user = request.user)[ :10]
+        completedTasks = Task.objects.filter(status = 'Completed', assigned_user = request.user)[ :10]
+        inProgressTasks = Task.objects.filter(status = 'In Progress', assigned_user = request.user)[ :10]
+        return render(request, 'pages/employee/dashboard.html', {'pendingTasks':pendingTasks, 'completedTasks':completedTasks, 'inProgressTasks':inProgressTasks})
     else:
         return redirect('/employer/dashboard')
+    
+@login_required(login_url='/login')
+def tasks(request):
+    role = request.user.profile.role
+    if role == "employer":
+        return redirect('/employer/tasks/')
+    elif role == "employee":
+        return redirect('/employee/tasks/')
+    else:
+        return redirect('/')
+
+@login_required(login_url='/login')
+def employerTasks(request):
+    role = request.user.profile.role
+    if role == "employer":
+        lowTasks = Task.objects.filter(user = request.user, priority = "Low")
+        mediumTasks = Task.objects.filter(user = request.user, priority = "Medium")
+        highTasks = Task.objects.filter(user= request.user, priority = "High")
+        return render(request, 'pages/employer/tasks/task_page.html', {'lowTasks': lowTasks, 'mediumTasks':mediumTasks, 'highTasks': highTasks})
+    else:
+        return redirect ('/employee/tasks')
+    
+@login_required(login_url='/login')
+def employeeTasks(request):
+    role = request.user.profile.role
+    if role == "employee":
+        lowTasks = Task.objects.filter(assigned_user = request.user, priority = "Low")
+        mediumTasks = Task.objects.filter(assigned_user = request.user, priority = "Medium")
+        highTasks = Task.objects.filter(assigned_user= request.user, priority = "High")
+        return render(request, 'pages/employee/tasks/task_page.html', {'lowTasks': lowTasks, 'mediumTasks':mediumTasks, 'highTasks': highTasks})
+    else:
+        return redirect ('/employer/tasks')

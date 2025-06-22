@@ -1,0 +1,65 @@
+{% extends 'layouts/main.html' %}
+{% block content %}
+<div class="grid grid-cols-3 gap-4 my-4 mx-4">
+    <div class="">
+        <div class="text-xl px-4 py-1 font-bold text-white rounded-md bg-blue-700">Low Priority Tasks</div>
+        <div class="rounded-lg">
+            {% for task in lowTasks %}
+            <a href="/employer/task/{{task.id}}"
+                class="grid grid-cols-3 gap-2 rounded-md text-center text-lg font-semibold px-4 text-gray-900 py-1 border-l-4 border-b-2 border-b-white bg-gray-200 hover:bg-gray-300 hover:scale-[101%] duration-300
+                        {% if task.status == 'Canceled' %} text-red-500
+        {% elif task.status == 'Completed' %} border-l-green-500
+        {% elif task.status == 'Pending' %} border-l-yellow-500
+        {% elif task.status == 'In Progress' %} border-l-blue-500
+        {% else %} border-l-purple-500
+        {% endif %}">
+                <div class="">{{ task.title }}</div>
+                <div>{{task.project.title}} </div>
+                <div class=""> {{task.project}}
+                </div>
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="">
+        <div class="text-xl px-4 py-1 font-bold text-white rounded-md bg-yellow-600">Medium Priority Tasks</div>
+        <div class="rounded-lg">
+            {% for task in mediumTasks %}
+            <a href="/employer/task/{{task.id}}"
+                class="grid grid-cols-3 gap-2 rounded-md text-center text-lg font-semibold px-4 text-gray-900 py-1 border-l-4 border-b-2 border-b-white bg-gray-200 hover:bg-gray-300 hover:scale-[101%] duration-300
+                        {% if task.status == 'Canceled' %} border-l-red-500
+        {% elif task.status == 'Completed' %} border-l-green-500
+        {% elif task.status == 'Pending' %} border-l-yellow-500
+        {% elif task.status == 'In Progress' %} border-l-blue-500
+        {% else %} border-l-purple-500
+        {% endif %}">
+                <div class="">{{ task.title }}</div>
+                <div>{{task.project.title}}</div>
+                <div class=""> {{task.project}}
+                </div>
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="">
+        <div class="text-xl px-4 py-1 font-bold text-white rounded-md bg-red-600">High Priority Tasks</div>
+        <div class="rounded-lg">
+            {% for task in highTasks %}
+            <a href="/employer/task/{{task.id}}"
+                class="grid grid-cols-3 gap-2 rounded-md text-center text-lg font-semibold px-4 text-gray-900 py-1 border-l-4 border-b-2 border-b-white bg-gray-200 hover:bg-gray-300 hover:scale-[101%] duration-300
+                        {% if task.status == 'Canceled' %} border-l-red-500
+        {% elif task.status == 'Completed' %} border-l-green-500
+        {% elif task.status == 'Pending' %} border-l-yellow-500
+        {% elif task.status == 'In Progress' %} border-l-blue-500
+        {% else %} border-l-purple-500
+        {% endif %}">
+                <div class="">{{ task.title }}</div>
+                <div>{{task.project.title}}</div>
+                <div class=""> {{task.project}}
+                </div>
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

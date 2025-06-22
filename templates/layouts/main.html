@@ -43,7 +43,10 @@
           <div class="hidden md:block">
             <div class="ml-10 flex items-baseline space-x-8">
               <a href="/dashboard" class="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 font-medium px-3 py-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 transition-all duration-200">Home</a>
+             {% if user.is_authenticated%}
               <a href="/projects" class="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 font-medium px-3 py-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 transition-all duration-200">Projects</a>
+              <a href="/tasks" class="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 font-medium px-3 py-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 transition-all duration-200">Tasks</a>
+              {%endif%}
               <a href="/about" class="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 font-medium px-3 py-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 transition-all duration-200">About</a>
               <a href="/services" class="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 font-medium px-3 py-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 transition-all duration-200">Services</a>
               <a href="/contact" class="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 font-medium px-3 py-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 transition-all duration-200">Contact</a>
@@ -75,7 +78,9 @@
             <div class="absolute top-16 left-0 right-0 hidden peer-checked:block bg-white dark:bg-gray-800 shadow-lg border-t border-gray-200 dark:border-gray-700">
               <div class="px-2 pt-2 pb-3 space-y-1">
                 <a href="/dashboard" class="block px-3 py-2 text-gray-700 dark:text-gray-300 hover:text-blue-600 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg font-medium transition-all duration-200">Home</a>
+                {%if user.is_authenticated%}
                 <a href="/projects" class="block px-3 py-2 text-gray-700 dark:text-gray-300 hover:text-blue-600 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg font-medium transition-all duration-200">Projects</a>
+                {%endif%}
                 <a href="/about" class="block px-3 py-2 text-gray-700 dark:text-gray-300 hover:text-blue-600 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg font-medium transition-all duration-200">About</a>
                 <a href="#" class="block px-3 py-2 text-gray-700 dark:text-gray-300 hover:text-blue-600 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg font-medium transition-all duration-200">Services</a>
                 <a href="#" class="block px-3 py-2 text-gray-700 dark:text-gray-300 hover:text-blue-600 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg font-medium transition-all duration-200">Contact</a>

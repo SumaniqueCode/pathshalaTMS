@@ -2,10 +2,10 @@
 {% block content %}
 <div class="grid grid-cols-3 gap-4 my-4 mx-4">
     <div class="">
-        <div class="text-xl px-4 py-1 font-bold text-white bg-blue-700 rounded-md bg-yellow-600">Pending Tasks</div>
+        <div class="text-xl px-4 py-1 font-bold text-white rounded-md bg-yellow-600">Pending Tasks</div>
         <div class="rounded-lg">
             {% for task in pendingTasks %}
-            <div
+            <a href="/employer/task/{{task.id}}"
                 class="grid grid-cols-3 gap-2 rounded-md text-center text-lg font-semibold px-4 text-gray-900 py-1 border-b-2 border-white bg-gray-200 hover:bg-gray-300 hover:scale-[101%] duration-300">
                 <div class="">{{ task.title }}</div>
                 <div>{{task.project.title}} </div>
@@ -15,15 +15,15 @@
             {% else %} text-purple-500
             {% endif %}"> {{task.priority}}
                 </div>
-            </div>
+            </a>
             {% endfor %}
         </div>
     </div>
     <div class="">
-        <div class="text-xl px-4 py-1 font-bold text-white bg-blue-700 rounded-md bg-blue-700">In Progress Tasks</div>
+        <div class="text-xl px-4 py-1 font-bold text-white rounded-md bg-blue-700">In Progress Tasks</div>
         <div class="rounded-lg">
             {% for task in inProgressTasks %}
-            <div
+            <a href="/employer/task/{{task.id}}"
                 class="grid grid-cols-3 gap-2 rounded-md text-center text-lg font-semibold px-4 text-gray-900 py-1 border-b-2 border-white bg-gray-200 hover:bg-gray-300 hover:scale-[101%] duration-300">
                 <div class="">{{ task.title }}</div>
                 <div>{{task.project.title}}</div>
@@ -33,25 +33,25 @@
             {% else %} text-purple-500
             {% endif %}"> {{task.priority}}
                 </div>
-            </div>
+            </a>
             {% endfor %}
         </div>
     </div>
     <div class="">
-        <div class="text-xl px-4 py-1 font-bold text-white bg-blue-700 rounded-md bg-red-600">Completed Tasks</div>
+        <div class="text-xl px-4 py-1 font-bold text-white rounded-md bg-green-700">Completed Tasks</div>
         <div class="rounded-lg">
             {% for task in completedTasks %}
-            <div
+            <a href="/employer/task/{{task.id}}"
                 class="grid grid-cols-3 gap-2 rounded-md text-center text-lg font-semibold px-4 text-gray-900 py-1 border-b-2 border-white bg-gray-200 hover:bg-gray-300 hover:scale-[101%] duration-300">
                 <div class="">{{ task.title }}</div>
                 <div>{{task.project.title}}</div>
                 <div class="{% if task.priority == 'High' %} text-red-500
-            {% elif task.priority == 'Medium' %} text-yellow-500
-            {% elif task.priority == 'Low' %} text-blue-500
-            {% else %} text-purple-500
-            {% endif %}"> {{task.priority}}
+                    {% elif task.priority == 'Medium' %} text-yellow-500
+                    {% elif task.priority == 'Low' %} text-blue-500
+                    {% else %} text-purple-500
+                    {% endif %}"> {{task.priority}}
                 </div>
-            </div>
+            </a>
             {% endfor %}
         </div>
     </div>

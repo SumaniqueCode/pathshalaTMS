@@ -38,7 +38,8 @@ employer_urlpatterns = [
     path("task/<int:id>/", taskDetails),
     path("edit-task/<int:id>/", editTaskPage),
     path('update-task/<int:id>', updateTask),
-    path('delete-task/<int:project_id>/<int:id>', deleteTask)
+    path('delete-task/<int:project_id>/<int:id>', deleteTask),
+    path('tasks/', employerTasks),
 ]
 
 employee_urlpatterns = [
@@ -47,6 +48,7 @@ employee_urlpatterns = [
     path("project-details/<int:id>/", employeeProjectDetails),
     path("task/<int:id>/", taskDetails),
     path("submit-task/<int:id>", submitTask),
+    path('tasks/', employeeTasks),
 ]
 
 urlpatterns = [
@@ -64,6 +66,7 @@ urlpatterns = [
     path("employer/", include(employer_urlpatterns)),
     path("employee/", include(employee_urlpatterns)),
     path("projects/", projects),
+    path("tasks/", tasks),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

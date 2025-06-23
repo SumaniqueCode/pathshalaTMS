@@ -69,6 +69,8 @@ urlpatterns = [
     path("projects/", projects),
     path("tasks/", tasks),
     path('wallet/', walletPage),
+    path('khalti_payment/', khalti_payment, name='khalti_payment'),
+    path('verify-payment/', verify_payment, name='verify_payment'),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

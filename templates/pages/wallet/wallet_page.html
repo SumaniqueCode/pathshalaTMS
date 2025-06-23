@@ -42,9 +42,9 @@
                     .then(data => {
                         console.log(data);
                         if (data.status === "Payment Successful") {
-                            window.location.replace('/wallets/'); // Success URL
+                            window.location.replace('/wallet/'); // Success URL
                         } else {
-                            window.location.replace('/wallets/'); // Cancellation URL
+                            window.location.replace('/wallet/'); // Cancellation URL
                         }
                     });
                 },

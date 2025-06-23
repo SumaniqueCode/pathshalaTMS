@@ -136,3 +136,4 @@ def employeeTasks(request):
         return render(request, 'pages/employee/tasks/task_page.html', {'lowTasks': lowTasks, 'mediumTasks':mediumTasks, 'highTasks': highTasks})
     else:
         return redirect ('/employer/tasks')
+    

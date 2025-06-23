@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'user',
     'projects',
     'tasks',
+    'wallets',
 ]
 
 MIDDLEWARE = [

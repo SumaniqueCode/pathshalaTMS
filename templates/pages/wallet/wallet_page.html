@@ -1,0 +1,71 @@
+{% extends 'layouts/main.html' %}
+{% block content %}
+  <div class="flex min-h-[60vh]">
+    <div class="m-auto w-1/2 px-4 py-6 border-b-2 border-r-2 border-blue-700 bg-white rounded-lg shadow-md">
+      <h1 class="text-center text-xl font-bold mb-4 text-blue-600">Wallet</h1>
+      <div>
+        Balance: 
+      </div>
+      <div class="flex flex-col items-center gap-2 mt-6">
+        <div class="">Add Balance</div>
+        <button id="payment-button" class="px-6 py-1 text-white text-md font-bold bg-purple-700 rounded-lg">Khalti</button>
+      </div>
+    </div>
+        <script>
+        var config = {
+            publicKey: "test_public_key_9ecd180c7edb4c72a4348a15ed175a75", // Update with your Khalti public key
+            productIdentity: "{{request.user.id}}", // Ensure the correct product identifier is used
+            productName: "Task Management",
+            productUrl: "http://gameofthrones.wikia.com/wiki/Dragons", // Update with your product URL (if applicable)
+            paymentPreference: [
+                "KHALTI",
+                "EBANKING",
+                "MOBILE_BANKING",
+                "CONNECT_IPS",
+                "SCT",
+            ],
+            eventHandler: {
+                onSuccess(payload) {
+                    var url = '/verify-payment/'; // Your Django URL for verification
+                    fetch(url, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-CSRFToken': '{{ csrf_token }}'
+                        },
+                        body: JSON.stringify({
+                            token: payload.token,
+                            amount: payload.amount
+                        })
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log(data);
+                        if (data.status === "Payment Successful") {
+                            window.location.replace('/wallets/'); // Success URL
+                        } else {
+                            window.location.replace('/wallets/'); // Cancellation URL
+                        }
+                    });
+                },
+                onError(error) {
+                    console.log(error);
+                },
+                onClose() {
+                    console.log('widget is closing');
+                }
+            }
+        };
+
+        var checkout = new KhaltiCheckout(config);
+         // Automatically trigger payment button click when the page loads
+      var btn = document.getElementById('payment-button')
+      btn.onclick = function () {
+            var total_price = parseFloat(10) * 100;
+            checkout.show({
+                amount: total_price.toFixed(0) // Convert back to integer paisa
+            });
+        }
+    </script>
+  </div>
+{% endblock %}

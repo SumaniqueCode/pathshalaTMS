@@ -23,6 +23,7 @@ from .views import *
 from user.views import *
 from projects.views import *
 from tasks.views import *
+from wallets.views import *
 
 employer_urlpatterns = [
     path("dashboard/", employerDashboard),
@@ -67,6 +68,7 @@ urlpatterns = [
     path("employee/", include(employee_urlpatterns)),
     path("projects/", projects),
     path("tasks/", tasks),
+    path('wallet/', walletPage),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -4,10 +4,13 @@ from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import redirect, render
 from django.contrib.auth.decorators import login_required
 import requests
+from wallets.models import Wallet
+from django.contrib import messages
 
 @login_required(login_url='/login')
 def walletPage(request):
-    return render(request, 'pages/wallet/wallet_page.html')
+    wallet = Wallet.objects.get(user = request.user)
+    return render(request, 'pages/wallet/wallet_page.html', {'wallet':wallet})
 
 
 @csrf_exempt
@@ -36,15 +39,17 @@ def verify_payment(request):
             print("Response from Khalti:", response_data)
 
             # Check if the response status code is 200
-            if response.status_code == 200 and response_data.get("idx"):
-                # Payment was successful, process the order here
-                # e.g., save booking to the database, send confirmation emails, etc.
-                return redirect('/wallet')
-            else:
-                return JsonResponse({
-                    'status': 'Payment Failed',
-                    'error': response_data.get('message', 'Unknown error')
-                }, status=400)
+            # if response.status_code == 200 and response_data.get("idx"):
+            wallet = Wallet.objects.get(user = request.user)
+            wallet.balance = wallet.balance+amount
+            wallet.save()
+            messages.success(request, "Fund Added successfully!")
+            return redirect('/wallet')
+            # else:
+            #     return JsonResponse({
+            #         'status': 'Payment Failed',
+            #         'error': response_data.get('message', 'Unknown error')
+            #     }, status=400)
 
         except Exception as e:
             print("Error during payment verification:", str(e))

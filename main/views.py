@@ -7,6 +7,7 @@ from django.contrib.auth.decorators import login_required
 from tasks.models import Task
 from django.contrib.auth.password_validation import validate_password
 from django.core.validators import validate_email
+from wallets.models import Wallet
 
 def index(request):
     return render(request, 'pages/index.html')
@@ -53,6 +54,8 @@ def registerUser(request):
         user = User.objects.create_user(username=username, email=email, password=password, first_name=first_name, last_name=last_name)
         profile = Profile(user=user, dob=dob, phone=phone, address=address, gender=gender, role="employee", image=image)
         profile.save()
+        wallet = Wallet.objects.create(user = user, balance = 0)
+        wallet.save()
         messages.success(request, "User created successfully")
         user.save()
         return redirect('/login')
